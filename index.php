@@ -23,7 +23,7 @@
 #												#																						#
 #################################################
 define('ROOT', __DIR__ . DIRECTORY_SEPARATOR);
-define('HOST', 'http://localhost/FrameworkTest/');
+define('HOST', '//'.$_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']);
 include 'Autoload/DefaultLoader.php';
 Autoload\DefaultLoader::registerAutoload();
 

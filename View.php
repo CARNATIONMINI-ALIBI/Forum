@@ -52,6 +52,16 @@ class View {
                 . DIRECTORY_SEPARATOR
                 . $name;
     }
+    
+    public function url($controller, $action = 'index', $paramName = null, $paramValue = null) {
+        $url = URL . $controller . '/' . $action;
+        
+        if ($paramName) {
+            $url .= '/' . $paramName . '/' . $paramValue;
+        }
+        
+        return $url;
+    }
 
     public function __set($name, $value) {
         $this->$name = $value;
