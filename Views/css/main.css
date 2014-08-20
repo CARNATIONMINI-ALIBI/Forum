@@ -1,0 +1,69 @@
+html, body, ul, li, form, a, section, article, main, header, footer, div, h1, h2, h3, h4, h5, h6 {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'arial';
+    font-size: 62.5%;
+    background-color: #999;
+}
+
+#wrapper {
+    width: 80%;
+    margin: 0 auto;
+    background-color: #ccc;
+}
+
+    #wrapper header h1 {
+        background-color: red;
+        color: #fff;
+        text-align: center;
+        line-height: 2rem;
+        font-size: 2rem;
+        padding: 10px;
+        text-transform: uppercase;
+    }
+
+    #wrapper header h2 {
+        font-size: 1.2rem;
+        text-align: center;
+        padding: 5px;
+        background-color: #fff;
+    }
+
+    #wrapper header ul {
+        list-style-type: none;
+        display:inline-block;
+        width:71%;
+        margin-left: 2%;
+    }
+
+        #wrapper header ul li{
+            display: inline-block;
+            margin-right: 1%;
+        }
+            #wrapper header ul li a{
+                text-decoration: none;
+                font-size: 1rem;
+                padding: 3px 5px;
+                display: block;
+                color: #fff;
+            }
+                #wrapper header ul li a:hover{
+                    color: #f00;
+                    background-color: #fff;
+                }
+
+    #wrapper header form  {
+        display: inline-block;
+        margin-right: 3%;
+        padding: 2px 0;
+    }
+        #wrapper header form input {
+
+        }
+
+
+
+
