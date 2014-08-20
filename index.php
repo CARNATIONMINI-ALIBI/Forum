@@ -23,7 +23,7 @@
 #												#																						#
 #################################################
 define('ROOT', __DIR__ . DIRECTORY_SEPARATOR);
-define('HOST', '//'.$_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']);
+define('HOST', '//'.$_SERVER['HTTP_HOST'] . str_replace(basename($_SERVER['PHP_SELF']), '', $_SERVER['PHP_SELF']));
 include 'Autoload/DefaultLoader.php';
 Autoload\DefaultLoader::registerAutoload();
 

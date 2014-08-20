@@ -18,6 +18,9 @@ class Post {
     }
     
     public function getParam($param) {
+        if (!isset($this->_params[$param])) {
+            return false;
+        }
         return $this->_params[$param];
     }
 }

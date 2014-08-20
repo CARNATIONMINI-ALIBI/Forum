@@ -54,7 +54,7 @@ class View {
     }
     
     public function url($controller, $action = 'index', $paramName = null, $paramValue = null) {
-        $url = URL . $controller . '/' . $action;
+        $url = HOST . $controller . '/' . $action;
         
         if ($paramName) {
             $url .= '/' . $paramName . '/' . $paramValue;
