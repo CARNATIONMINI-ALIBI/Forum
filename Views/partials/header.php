@@ -3,7 +3,9 @@
 <head>
     <meta charset="utf-8"/>
     <title>Best Forum</title>
-    <link rel="stylesheet" href="../css/main.css"/>
+    <?php foreach ($this->getStyles() as $style): ?>
+        <?= $style; ?>
+    <?php endforeach; ?>
 </head>
 <body>
 <div id="wrapper">

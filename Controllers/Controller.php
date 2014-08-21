@@ -23,7 +23,9 @@ abstract class Controller {
      * @return void
      */
     public function render() {
+        $this->getView()->initHeader();
         $this->getView()->initTemplate();
+        $this->getView()->initFooter();
     }
 
     protected function init() { }

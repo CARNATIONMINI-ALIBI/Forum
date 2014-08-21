@@ -12,6 +12,14 @@ class View {
     const VIEW_FOLDER = 'Views';
     const VIEW_DEFAULT = 'index';
     const VIEW_PARTIALS = 'partials';
+    
+    const CSS_FOLDER = 'css';
+    const SCRIPTS_FOLDER = 'js';
+    
+    private static $_styles = [];
+    private static $_scripts = [];
+    private static $_header;
+    private static $_footer;
 
     public function setFrontController(\ANSR\Dispatcher\FrontController $fronController) {
         $this->_frontController = $fronController;
@@ -37,12 +45,24 @@ class View {
                 . '.php';
     }
 
+    public function initHeader() {
+        if (self::$_header) {
+            $this->partial(self::$_header);
+        }
+    }
+    
     /**
      * Includes template
      * @return void
      */
     public function initTemplate() {
         require_once $this->getTemplate();
+    }
+    
+    public function initFooter() {
+        if (self::$_footer) {
+            $this->partial(self::$_footer);
+        }
     }
 
     public function partial($name) {
@@ -70,5 +90,41 @@ class View {
     public function __get($name) {
         return $this->$name;
     }
-
+    
+    public static function addStyle($filename, $dir = null) {
+        if (!$dir) {
+            $dir = HOST . self::VIEW_FOLDER . '/' . self::CSS_FOLDER;
+        }
+        
+        $style = $dir . '/' . $filename;
+        
+        self::$_styles[] = "<link rel='stylesheet' type='text/css' href='$style'>";
+    }
+    
+    public static function addScripts($filename, $dir = null) {
+        if (!$dir) {
+            $dir = HOST . self::VIEW_FOLDER . '/' . self::SCRIPTS_FOLDER;
+        }
+        
+        $script = $dir . '/' . $filename;
+        
+        self::$_scripts[] = "<script src='$script'></script>";
+    }
+    
+    public function getStyles() {
+        return self::$_styles;
+    }
+    
+    public function getScripts() {
+        return self::$_scripts;
+    }
+    
+    public static function setHeader($header) {
+        self::$_header = $header;
+    }
+    
+    public static function setFooter($footer) {
+        self::$_footer = $footer;
+    }
+ 
 }
