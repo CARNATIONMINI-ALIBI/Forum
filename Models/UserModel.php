@@ -69,5 +69,15 @@ class UserModel extends Model {
         
         return $row['id'];
     }
+
+    public function getRole($user_id) {
+        $user_id = intval($user_id);
+
+        $result = $this->getDb()->query("SELECT role_id FROM users WHERE id = '$id';");
+
+        $row = $this->getDb()->fetch($result)[0];
+        
+        return $row['role_id'];
+    }
 }
 
