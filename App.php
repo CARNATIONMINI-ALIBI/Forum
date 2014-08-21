@@ -10,6 +10,10 @@ namespace ANSR;
  * 	Add models here in order to have autocompletion in the controller
  *  @property \ANSR\Models\TestModel $TestModel
  *  @property \ANSR\Models\UserModel $UserModel
+ *  @property \ANSR\Models\AnswerModel $AnswerModel
+ *  @property \ANSR\Models\TopicModel $TopicModel
+ *  @property \ANSR\Models\ForumModel $ForumModel
+ *  @property \ANSR\Models\CategoryModel $CategoryModel
  */
 final class App {
 
