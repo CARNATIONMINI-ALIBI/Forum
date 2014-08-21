@@ -13,6 +13,12 @@ class ForumModel extends Model {
         
         return $this->getDb()->fetch($result);
     }
+
+    public functin getForumById($id) {
+        $result = $this->getDb()->query("SELECT id, name, category_id, order_id FROM forums WHERE id = " . intval($id));
+        
+        return $this->getDb()->fetch($result)[0];
+    }
     
     public function getForums() {
         $result = $this->getDb()->query("SELECT id, name, category_id, order_id FROM forums");

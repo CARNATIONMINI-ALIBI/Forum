@@ -13,6 +13,12 @@ class CategoryModel extends Model {
         
         return $this->getDb()->fetch($result);
     }
+
+    public function getCategoryById($id) {
+         $result = $this->getDb()->query("SELECT id, name, order_id FROM categories WHERE $id = " . intval($id));
+        
+        return $this->getDb()->fetch($result)[0];
+    }
     
     public function add($name) {
         $this->getDb()->query("INSERT INTO categories (name, order_id) VALUES ('$name', 1);");
