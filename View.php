@@ -20,6 +20,7 @@ class View {
     private static $_scripts = [];
     private static $_header;
     private static $_footer;
+    private static $_aside;
 
     public function setFrontController(\ANSR\Dispatcher\FrontController $fronController) {
         $this->_frontController = $fronController;
@@ -64,7 +65,13 @@ class View {
             $this->partial(self::$_footer);
         }
     }
-
+    //try
+    public function initAside() {
+        if (self::$_aside) {
+            $this->partial(self::$_aside);
+        }
+    }
+    //try
     public function partial($name) {
         include self::VIEW_FOLDER
                 . DIRECTORY_SEPARATOR
@@ -126,5 +133,9 @@ class View {
     public static function setFooter($footer) {
         self::$_footer = $footer;
     }
- 
+    //try
+    public static function setAside($aside) {
+        self::$_aside = $aside;
+    }
+    //try
 }
