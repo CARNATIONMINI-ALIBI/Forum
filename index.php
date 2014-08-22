@@ -30,7 +30,9 @@ Autoload\DefaultLoader::registerAutoload();
 \ANSR\View::addStyle('main.css');
 
 \ANSR\View::setHeader('header.php');
+\ANSR\View::setAside('aside.php');
 \ANSR\View::setFooter('footer.php');
+
 
 \ANSR\Library\DependencyContainer\AppStarter::createApp('MySQLi_Procedural', 'DefaultRouter', 'development');
 

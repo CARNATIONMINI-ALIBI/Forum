@@ -24,6 +24,7 @@ abstract class Controller {
      */
     public function render() {
         $this->getView()->initHeader();
+        $this->getView()->initAside();
         $this->getView()->initTemplate();
         $this->getView()->initFooter();
     }
@@ -33,7 +34,7 @@ abstract class Controller {
     /**
      * @return \ANSR\App
      */
-    protected function getApp() {
+    public function getApp() {
         return $this->_app;
     }
 

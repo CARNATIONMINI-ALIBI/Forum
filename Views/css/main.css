@@ -64,6 +64,24 @@ body {
 
         }
 
+#aside{
+    list-style-type: none;
+    border: 1px solid black;
+    border-bottom: none;
+    display: inline-block;
+    width: 20%;
+}
+.aside{
+    border-bottom: 1px solid black;
+    padding: 20px 10px;
+
+}
+
+#mainSection{
+    display: inline-block;
+    width: 79%;
+    vertical-align: top;
+}
 
 
 
