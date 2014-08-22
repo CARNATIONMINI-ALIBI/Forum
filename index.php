@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 #################################################
 #												#
 #				ANSR Framework					#
@@ -28,6 +28,7 @@ include 'Autoload/DefaultLoader.php';
 Autoload\DefaultLoader::registerAutoload();
 
 \ANSR\View::addStyle('main.css');
+
 \ANSR\View::setHeader('header.php');
 \ANSR\View::setFooter('footer.php');
 
