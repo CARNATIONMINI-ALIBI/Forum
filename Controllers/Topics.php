@@ -18,6 +18,10 @@ class Topics extends Controller {
         if ($this->getRequest()->getParam('id')) {
             $result = $this->getApp()->TopicModel->getTopicById($this->getRequest()->getParam('id'));
             $this->getView()->topic = $result;
+        } elseif ($this->getRequest()->getParam('forumid')){
+            $result = $this->getApp()->TopicModel->getTopicsByForumId($this->getRequest()->getParam('forumid'));
+//            $this->getView()->topic = $result;
+
         }
     }
     

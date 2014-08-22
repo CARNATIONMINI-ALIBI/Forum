@@ -74,13 +74,19 @@ body {
 .aside{
     border-bottom: 1px solid black;
     padding: 20px 10px;
-
 }
 
 #mainSection{
     display: inline-block;
     width: 79%;
     vertical-align: top;
+}
+.asideForums{
+    list-style-type: none;
+    padding: 10px 20px;
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+    /*display: none;*/
 }
 
 
