@@ -74,4 +74,13 @@ class TopicModel extends Model {
         $this->getDb()->query("DELETE FROM topics WHERE id = " . intval($id));
         return $this->getDb()->affectedRows() > 0;
     }
+    
+    public function find($keyword) {
+        $keyword = $this->getDb()->escape($keyword);
+        
+        $result = $this->getDb()->query("SELECT id, summary, body, forum_id, created_on, user_id FROM topics WHERE body LIKE '%$keyword%' OR summary LIKE '%$keyword%'");
+        
+        return $this->getDb()->fetch($result);
+    }
+
 }

@@ -34,5 +34,15 @@ class Topics extends Controller {
         die(json_encode(array('success' => 0)));
     }
     
+    public function find() {
+        
+        $result = ['success' => 0];
+        
+        if ($this->getRequest()->getPost()->getParam('keyword')) {
+            $result = $this->getApp()->TopicModel->find($this->getRequest()->getPost()->getParam('keyword'));
+        }
+        
+        die(json_encode($result));
+    }    
 }
 
