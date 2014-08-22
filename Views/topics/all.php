@@ -1,5 +1,7 @@
-<div id="mainSection">
+
 <?php foreach ($this->topics as $topic):?>
-    <a href="<?=$this->url('topics', 'view', 'id', $topic['id']);?>"><?= $topic['summary']; ?> </a> [ <?= $topic['created_on']; ?> ] <br/>
+    <div class="topics">
+        <a href="<?=$this->url('topics', 'view', 'id', $topic['forum_id']);?>"><?= $topic['summary']; ?> </a> [ <?= $topic['created_on']; ?> ]
+    </div>
 <?php endforeach; ?>
 </div>
