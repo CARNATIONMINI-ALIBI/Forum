@@ -35,7 +35,7 @@ class UserModel extends Model {
     public function login($username, $password) {
         $username = $this->getDb()->escape($username);
         $password = md5($password);
-        
+
         if ($this->userExists($username, $password)) {
             $_SESSION['user_id'] = $this->getIdByUsername($username);
             return true;
@@ -49,7 +49,6 @@ class UserModel extends Model {
         $query = "SELECT COUNT(*) AS cnt FROM users WHERE username = '$username' ";
         
         if ($password) {
-            $password = md5($password);
             $query .= " AND password = '$password'";
         }
         
@@ -76,8 +75,16 @@ class UserModel extends Model {
         $result = $this->getDb()->query("SELECT role_id FROM users WHERE id = '$user_id';");
 
         $row = $this->getDb()->fetch($result)[0];
-        
+
         return $row['role_id'];
+    }
+   
+    public function isAdmin($user_id) {
+        return $this->getRole($user_id) == self::ROLE_ADMINISTRATOR;
+    }
+    
+    public function isModerator($user_id) {
+        return $this->getRole($user_id) == self::ROLE_MODERATOR;
     }
 }
 
