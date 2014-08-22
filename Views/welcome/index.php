@@ -1,5 +1,19 @@
-<input type="text" id="user"/>
-<input type="text" id="pass"/>
+<div id="login">
+    <label for="userLogin">Username</label>
+    <input type="text" id="userLogin"/>
+    <label for="passLogin">Password</label>
+    <input type="password" id="passLogin"/>
+    <button>Submit</button>
+</div>
+<div id="register">
+    <label for="userRegister">Username</label>
+    <input type="text" id="userRegister"/>
+    <label for="passRegister">Password</label>
+    <input type="password" id="passRegister"/>
+    <label for="passRepeat">Repeat password</label>
+    <input type="password" id="passRepeat"/>
+    <button>Submit</button>
+</div>
 
 <script>
     
