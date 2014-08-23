@@ -4,27 +4,28 @@
 </div>
 
 <script>
-    var loginRegisterField = document.getElementById('loginRegisterField');
-    var loginButton = document.getElementById('loginButton');
-    var registerButton = document.getElementById('registerButton');
+    var loginRegisterField = $('#loginRegisterField');
+    var loginButton = $('#loginButton');
+    var registerButton = $('#registerButton');
 
-    loginButton.addEventListener('click', function () {
-        loginRegisterField.innerHTML = '<h2>Login</h2>' +
+    loginButton.click(function () {
+        loginRegisterField.html('<h2>Login</h2>' +
             '<label for="userLogin">Username</label>' +
             '<input type="text" id="userLogin"/>' +
             '<label for="passLogin">Password</label>' +
             '<input type="password" id="passLogin"/>' +
-            '<button onclick="login();">Submit</button> ';
+            '<button onclick="login();">Submit</button>');
     });
-    registerButton.addEventListener('click', function () {
-        loginRegisterField.innerHTML = '<h2>Register</h2>' +
+    registerButton.click(function () {
+
+        loginRegisterField.html('<h2>Register</h2>' +
             '<label for="userRegister">Username</label>' +
             '<input type="text" id="userRegister"/>' +
             '<label for="passRegister">Password</label>' +
             '<input type="password" id="passRegister"/>' +
             '<label for="passRepeat">Repeat password</label>' +
             '<input type="password" id="passRepeat"/>' +
-            '<button>Submit</button>';
+            '<button>Submit</button>');
     });
 
 
