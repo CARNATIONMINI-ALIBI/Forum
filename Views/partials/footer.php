@@ -1,7 +1,7 @@
 </div>
 </main>
 <footer>
-    <p>FOOTER</p>
+    <p>Powered By ANSR Framework</p>
 </footer>
 </div>
 </body>

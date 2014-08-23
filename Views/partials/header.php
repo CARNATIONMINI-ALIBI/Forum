@@ -35,10 +35,10 @@
         <h2>(: You just have to love it :)</h2>
         <ul>
             <li>
-                <a href="#">Login</a>
+                <a href="#" id="loginButton">Login</a>
             </li>
             <li>
-                <a href="#">Register</a>
+                <a href="#" id="registerButton">Register</a>
             </li>
         </ul>
         
