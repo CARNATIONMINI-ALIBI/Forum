@@ -1,6 +1,21 @@
 <?php /* @var $this \ANSR\View */ ?>
 <script>
-
+    var topicId = 0;
+//    function clearMainSection() {
+//        document.getElementById('mainSection').innerHTML = "<p></p>";
+//    }
+    function showForumTopics(){
+        var topicDiv = document.createElement('div');
+        topicDiv.setAttribute('id', 'topic' + topicId);
+        document.getElementById('mainSection').innerHTML = "";
+        topicDiv.innerHTML = "<?php foreach ($this->topics as $topic):?>" +
+            "<div class=\"topics\">" +
+            "<a href=\"<?=$this->url('topics', 'view', 'id', $topic['id']);?>\"><?= $topic['summary']; ?> </a> [ <?= $topic['created_on']; ?> ]" +
+            "</div>" +
+            "<?php endforeach; ?>";
+            document.getElementById('mainSection').appendChild(topicDiv);
+            topicId++;
+    }
 </script>
 <ul id="aside">
     <?php foreach ($this->getFrontController()->getController()->getApp()->CategoryModel->getCategories() as $category): ?>
@@ -9,7 +24,7 @@
             <ul>
                <?php foreach ($this->getFrontController()->getController()->getApp()->ForumModel->getForums() as $forum): ?>
 
-               <a href="<?=$this->url('topics', 'view', 'forumid', $forum["id"]);?>"><li class="asideForums"><?php echo $forum["name"]; ?></li></a>
+               <li class="asideForums" onclick="showForumTopics()"><?php echo $forum["name"]; ?></li>
                 <?php endforeach ?>
             </ul>
         </li>

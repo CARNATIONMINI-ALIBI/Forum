@@ -1,7 +1,7 @@
-<div id="loginRegisterField">
+<section id="loginRegisterField">
     <h2>Login if you are a member</h2>
     <h2>Register if you're not</h2>
-</div>
+</section>
 
 <script>
     var loginRegisterField = $('#loginRegisterField');

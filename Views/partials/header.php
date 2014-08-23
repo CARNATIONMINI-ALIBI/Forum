@@ -10,17 +10,17 @@
     <script>
 
         function searchTopics() {
-            $.post( "<?=$this->url('topics', 'find');?>", { 
-                keyword : $('#searchbox').val()
-            }).done(function( response ) {
+            $.post("<?=$this->url('topics', 'find');?>", {
+                keyword: $('#searchbox').val()
+            }).done(function (response) {
                 var json = $.parseJSON(response);
                 if (json.success == 0) {
                     alert('nishto');
                 } else {
-                    $.each(json, function(i, item) {
+                    $.each(json, function (i, item) {
                         var href = "<a href='<?=HOST;?>topics/view/id/" + item.id + "'>" + item.summary + "</a><br />";
                         $("#topics").append(href);
-                    } )
+                    })
                 }
             });
         }
@@ -29,21 +29,23 @@
 
 <body>
 <div id="wrapper">
-        
+
     <header>
         <h1>The best forum ever!!!</h1>
+
         <h2>(: You just have to love it :)</h2>
         <ul>
             <li>
-                <a href="#" id="loginButton">Login</a>
+                <button id="loginButton">Login</button>
             </li>
             <li>
-                <a href="#" id="registerButton">Register</a>
+                <button id="registerButton">Register</button>
             </li>
         </ul>
-        
-            <input type="text" id="searchbox" placeholder="search..." />
+        <div id="search">
+            <input type="text" id="searchbox" placeholder="search..."/>
             <button onclick="searchTopics()">Search</button>
-            <div id="topics"></div>
+        </div>
+        <div id="topics"></div>
     </header>
     <main>
