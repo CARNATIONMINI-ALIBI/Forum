@@ -46,6 +46,10 @@ class View {
                 . '.php';
     }
 
+    /**
+     * Includes header if one is set
+     * @return void
+     */
     public function initHeader() {
         if (self::$_header) {
             $this->partial(self::$_header);
@@ -60,18 +64,26 @@ class View {
         require_once $this->getTemplate();
     }
     
+    /**
+     * Includes footer if one is set
+     * @return void
+     */
     public function initFooter() {
         if (self::$_footer) {
             $this->partial(self::$_footer);
         }
     }
-    //try
+
+    /**
+     * Includes aside menu if one is set
+     * @return void
+     */
     public function initAside() {
         if (self::$_aside) {
             $this->partial(self::$_aside);
         }
     }
-    //try
+
     public function partial($name) {
         include self::VIEW_FOLDER
                 . DIRECTORY_SEPARATOR
@@ -80,6 +92,14 @@ class View {
                 . $name;
     }
     
+    /**
+     * Generates URL depending on the given controller, action and params
+     * @param string $controller
+     * @param string $action
+     * @param string $paramName
+     * @param string $paramValue
+     * @return string
+     */
     public function url($controller, $action = 'index', $paramName = null, $paramValue = null) {
         $url = HOST . $controller . '/' . $action;
         
@@ -98,6 +118,13 @@ class View {
         return $this->$name;
     }
     
+    /**
+     * Add styles to the global static styles array
+     * 
+     * @param string $filename
+     * @param string $dir
+     * @return void
+     */
     public static function addStyle($filename, $dir = null) {
         if (!$dir) {
             $dir = HOST . self::VIEW_FOLDER . '/' . self::CSS_FOLDER;
@@ -108,6 +135,13 @@ class View {
         self::$_styles[] = "<link rel='stylesheet' type='text/css' href='$style'>";
     }
     
+    /**
+     * Add scripts to the global static scripts array
+     * 
+     * @param string $filename
+     * @param string $dir
+     * @return void
+     */
     public static function addScripts($filename, $dir = null) {
         if (!$dir) {
             $dir = HOST . self::VIEW_FOLDER . '/' . self::SCRIPTS_FOLDER;
@@ -118,10 +152,16 @@ class View {
         self::$_scripts[] = "<script src='$script'></script>";
     }
     
+    /**
+     * @return array
+     */
     public function getStyles() {
         return self::$_styles;
     }
     
+    /**
+     * @return array
+     */
     public function getScripts() {
         return self::$_scripts;
     }
@@ -133,9 +173,8 @@ class View {
     public static function setFooter($footer) {
         self::$_footer = $footer;
     }
-    //try
+
     public static function setAside($aside) {
         self::$_aside = $aside;
     }
-    //try
 }
