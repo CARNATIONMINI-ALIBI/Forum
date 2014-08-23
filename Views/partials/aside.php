@@ -1,16 +1,13 @@
 <?php /* @var $this \ANSR\View */ ?>
 <script>
     var topicId = 0;
-//    function clearMainSection() {
-//        document.getElementById('mainSection').innerHTML = "<p></p>";
-//    }
     function showForumTopics(){
         var topicDiv = document.createElement('div');
         topicDiv.setAttribute('id', 'topic' + topicId);
         document.getElementById('mainSection').innerHTML = "";
-        topicDiv.innerHTML = "<?php foreach ($this->topics as $topic):?>" +
+        topicDiv.innerHTML = "<?php foreach ($this->getFrontController()->getController()->getApp()->TopicModel->getTopics() as $topic):?>" +
             "<div class=\"topics\">" +
-            "<a href=\"<?=$this->url('topics', 'view', 'id', $topic['id']);?>\"><?= $topic['summary']; ?> </a> [ <?= $topic['created_on']; ?> ]" +
+            "<a href=\"<?php $this->url('topics', 'view', 'id', $topic['id']);?>\"><?= $topic['summary']; ?> </a> [ <?= $topic['created_on']; ?> ]" +
             "</div>" +
             "<?php endforeach; ?>";
             document.getElementById('mainSection').appendChild(topicDiv);
@@ -30,4 +27,5 @@
         </li>
     <?php endforeach ?>
 </ul>
+
 <div id="mainSection">

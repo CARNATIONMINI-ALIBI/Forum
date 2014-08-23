@@ -3,10 +3,19 @@ html, body, ul, li, form, a, section, article, main, header, footer, div, h1, h2
     padding: 0;
 }
 
+html{
+    min-height: 100%;
+}
+main {
+    background: rgba(0, 0, 0, 0.6);;
+}
 body {
     font-family: 'arial';
     font-size: 100%;
-    background-color: #999;
+    min-height: 100%;
+    background: url("background.jpg") no-repeat;
+    background-size: 100% 100%;
+
 }
 
 input, button {
@@ -27,13 +36,12 @@ textarea {
 
 #wrapper {
     width: 80%;
-    margin: 10px auto;
-    background-color: #ccc;
+    margin: 0 auto;
+
 
 }
 
 #wrapper header h1 {
-    background-color: red;
     color: #fff;
     text-align: center;
     line-height: 2rem;
@@ -150,6 +158,7 @@ textarea {
     display: inline-block;
     width: 20%;
     margin: 15px 22px;
+    color: #ffffff;
 }
 
 #aside h2 {
@@ -188,3 +197,119 @@ footer p {
     text-align: center;
 }
 
+#logo{
+    margin-top: 0;
+    /*margin-bottom: 15px;*/
+}
+
+#wrapper header{
+    margin-bottom: 15px;
+    border: 2px solid #ffffff;
+    padding-bottom: 20px;
+}
+
+.topicSummary{
+    color: #ffffff;
+    padding: 20px;
+    margin: 10px;
+    border: 2px solid #ffffff;
+}
+.headTopicTemplate{
+    border-bottom: 1px solid #ffffff;
+    width: 50%;
+    height: 50px;
+    text-align: right;
+    display: inline-block;
+}
+.topicAuthor{
+    border-bottom: 1px solid #ffffff;
+    width: 49%;
+    height: 50px;
+    text-align: right;
+    display: inline-block;
+}
+.topicRating{
+    width: 33%;
+    height: 50px;
+    display: inline-block;
+    text-align: center;
+    border-right: 1px solid #ffffff;
+}
+.topicAnswers{
+    width: 32.5%;
+    height: 50px;
+    display: inline-block;
+    text-align: center;
+    border-right: 1px solid #ffffff;
+    margin-top: 5px;
+}
+.whenIsSet{
+    width: 33%;
+    height: 50px;
+    display: inline-block;
+    text-align: center;
+}
+
+.theTopic{
+    color: #ffffff;
+    padding: 20px;
+    margin: 10px;
+    border: 2px solid #ffffff;
+}
+
+#topicAnswers{
+    color: #ffffff;
+    padding: 20px;
+    margin: 10px;
+    border: 2px solid #ffffff;
+
+}
+
+.topicTitle{
+    border-bottom: 1px solid #ffffff;
+    width: 50%;
+    height: 50px;
+    text-align: right;
+    display: inline-block;
+}
+
+.topicBody{
+    border-bottom: 1px solid #ffffff;
+    width: 100%;
+    height: 75px;
+}
+
+.rateButtons{
+    width: 33%;
+    height: 50px;
+    display: inline-block;
+    text-align: center;
+    border-right: 1px solid #ffffff;
+    margin-top: 5px;
+}
+.topicAnswer{
+    border: 2px solid #ffffff;
+    margin-bottom: 10px;
+}
+
+.answerTitle{
+    border-bottom: 1px solid #ffffff;
+    width: 50%;
+    height: 50px;
+    text-align: right;
+    display: inline-block;
+}
+
+.answerAuthor{
+    border-bottom: 1px solid #ffffff;
+    width: 49%;
+    height: 50px;
+    text-align: right;
+    display: inline-block;
+}
+
+.answerBody{
+    border-bottom: 1px solid #ffffff;
+    width: 100%;
+    height: 75px;
+}
