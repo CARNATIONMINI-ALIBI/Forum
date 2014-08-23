@@ -8,7 +8,7 @@
     <?php endforeach; ?>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script>
-        
+
         function searchTopics() {
             $.post( "<?=$this->url('topics', 'find');?>", { 
                 keyword : $('#searchbox').val()
@@ -43,7 +43,7 @@
         </ul>
         
             <input type="text" id="searchbox" placeholder="search..." />
-            <a href="#" onclick="searchTopics()">Search</a>
+            <button onclick="searchTopics()">Search</button>
             <div id="topics"></div>
     </header>
     <main>
