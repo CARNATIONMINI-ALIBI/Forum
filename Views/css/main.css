@@ -5,14 +5,31 @@ html, body, ul, li, form, a, section, article, main, header, footer, div, h1, h2
 
 body {
     font-family: 'arial';
-    font-size: 62.5%;
+    font-size: 100%;
     background-color: #999;
+}
+
+input, button {
+    height: 25px;
+    line-height: 25px;
+    font-size: 20px;
+    border: none;
+    padding: 0 5px;
+}
+
+button:hover {
+    cursor: pointer;
+}
+
+textarea {
+    font-size: 18px;
 }
 
 #wrapper {
     width: 80%;
-    margin: 0 auto;
+    margin: 10px auto;
     background-color: #ccc;
+
 }
 
 #wrapper header h1 {
@@ -21,7 +38,7 @@ body {
     text-align: center;
     line-height: 2rem;
     font-size: 2rem;
-    padding: 10px;
+    padding: 20px;
     text-transform: uppercase;
 }
 
@@ -30,12 +47,14 @@ body {
     text-align: center;
     padding: 5px;
     background-color: #fff;
+    margin-bottom: 15px;
+    text-shadow: 1px 1px #fff;
 }
 
 #wrapper header ul {
     list-style-type: none;
     display: inline-block;
-    width: 71%;
+    width: 66%;
     margin-left: 2%;
 }
 
@@ -44,17 +63,17 @@ body {
     margin-right: 1%;
 }
 
-#wrapper header ul li a {
+#wrapper header ul li button {
     text-decoration: none;
-    font-size: 1rem;
-    padding: 3px 5px;
     display: block;
-    color: #fff;
+    color: #000;
+    background-color: #fff;
+
 }
 
-#wrapper header ul li a:hover {
-    color: #f00;
-    background-color: #fff;
+#wrapper header ul li button:hover {
+    background-color: #f00;
+    color:#fff;
 }
 
 #wrapper header form {
@@ -63,23 +82,91 @@ body {
     padding: 2px 0;
 }
 
+#search {
+    width: 30%;
+    display: inline-block;
+}
+
+#loginRegisterField {
+    padding: 10px;
+}
+
+#loginRegisterField h2{
+    text-align: center;
+    padding: 10px;
+    text-shadow: 1px 1px #fff;
+
+}
+
+#loginRegisterField input,#loginRegisterField label {
+    display: block;
+    font-size: 20px;
+    margin: 0 auto 5px;
+    width: 50%;
+}
+
+#loginRegisterField button {
+    width: 40%;
+    display:block;
+    margin: 20px auto 15px;
+}
+
+#addTopic {
+    padding: 10px;
+    width: 100%;
+    display: inline-block;
+}
+
+#addTopic h1 {
+    text-align: center;
+    text-shadow: 1px 1px #fff;
+}
+#addTopic input {
+    width: 80%;
+    margin: 15px auto 0;
+    display: block;
+    padding: 5px;
+}
+#addTopic textarea {
+    width: 80%;
+    height: 250px;
+    margin: 0 auto;
+    display: block;
+    margin-top: 15px;
+    padding:5px;
+}
+
+#addTopic button {
+    font-size: 25px;
+    margin: 0 auto;
+    display:block;
+    width: 50%;
+    margin-top: 15px;
+}
+
 #aside {
     list-style-type: none;
-    border: 1px solid black;
-    border-bottom: none;
+    border: 2px solid #fff;
     display: inline-block;
     width: 20%;
+    margin: 15px 22px;
+}
+
+#aside h2 {
+    text-shadow: 1px 1px #fff;
 }
 
 .aside {
-    border-bottom: 1px solid black;
     padding: 20px 10px;
 }
 
 #mainSection {
     display: inline-block;
-    width: 79%;
+    width: 72%;
     vertical-align: top;
+    margin:15px 10px 20px;
+    border:2px solid #fff;
+
 }
 
 .asideForums {
@@ -90,5 +177,13 @@ body {
     /*display: none;*/
 }
 
+footer {
+    padding: 5px;
+    background-color: #000;
+    color: #fff;
+}
 
+footer p {
+    text-align: center;
+}
 
