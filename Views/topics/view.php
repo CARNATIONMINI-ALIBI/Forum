@@ -6,7 +6,7 @@
         <button id="closeTopic">Close</button>
         <button id="deleteTopic">Delete</button>
     </header>
-    <div class="answer">
+    <div class="topic">
         <p>Lorem Ipsum dsfijl dsfij lsdfi sdlifj ldsifj ldsifj ldsifj </p>
         <p>Lorem Ipsum dsfijl dsfij lsdfi sdlifj ldsifj ldsifj ldsifj </p>
         <p>Lorem Ipsum dsfijl dsfij lsdfi sdlifj ldsifj ldsifj ldsifj </p>
