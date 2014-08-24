@@ -21,7 +21,10 @@
     <?php foreach ($this->topics as $topic): ?>
     <?php $userInfo = $this->getFrontController()->getController()->getApp()->TopicModel->getLastAuthorInfo($topic['id']);?>
     <tr>
-        <td><a href="<?=$this->url('topics', 'view', 'id', $topic['id']);?>"><?= $topic['summary']; ?></a></td>
+        <td>
+            <a href="<?=$this->url('topics', 'view', 'id', $topic['id']);?>"><?= $topic['summary']; ?></a> <br />
+            <span>by <a href="<?=$this->url('users', 'profile', 'id', $topic['user_id']);?>"><?= $this->getFrontController()->getController()->getApp()->UserModel->getUsernameById($topic['user_id']);?></a></span>
+        </td>
         <td><?= $this->getFrontController()->getController()->getApp()->TopicModel->getPostsCount($topic['id']); ?></td>
         <td><?= $topic['views']; ?></td>
         <td>
