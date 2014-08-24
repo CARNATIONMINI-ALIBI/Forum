@@ -34,8 +34,8 @@
 
     function login() {
         $.post("<?=$this->url('users', 'login');?>", {
-            username: $('#user').val(),
-            password: $('#pass').val()
+            username: $('#userLogin').val(),
+            password: $('#passLogin').val()
         }).done(function (response) {
             var json = $.parseJSON(response);
             if (json.success == 1) {
