@@ -1,13 +1,24 @@
+@font-face {
+  font-family: 'xolonium';
+  src: url('xolonium.otf'); 
+}
+@font-face {
+  font-family: 'gothic';
+  src: url('gothic.otf'); 
+}
+
+
 html, body, ul, li, form, a, section, article, main, header, footer, div, h1, h2, h3, h4, h5, h6 {
     margin: 0;
     padding: 0;
 }
 
 body {
-    font-family: 'arial';
+    font-family: 'xolonium';
     font-size: 100%;
-    background-color: #999;
+    background: url("space.jpg") no-repeat #000;
 }
+
 
 input, button {
     height: 25px;
@@ -15,6 +26,7 @@ input, button {
     font-size: 20px;
     border: none;
     padding: 0 5px;
+	font-family: 'xolonium';
 }
 
 button:hover {
@@ -26,9 +38,9 @@ textarea {
 }
 
 #wrapper {
-    width: 80%;
-    margin: 10px auto;
-    background-color: #ccc;
+    width: 70%;
+    margin: 50px auto;
+    background-color: #4472b9;
 
 }
 
@@ -87,6 +99,10 @@ textarea {
     display: inline-block;
 }
 
+#search input {
+    width: 56%;
+}
+
 #loginRegisterField {
     padding: 10px;
 }
@@ -100,7 +116,7 @@ textarea {
 
 #loginRegisterField input,#loginRegisterField label {
     display: block;
-    font-size: 20px;
+    font-size: 19px;
     margin: 0 auto 5px;
     width: 50%;
 }
@@ -148,8 +164,8 @@ textarea {
     list-style-type: none;
     border: 2px solid #fff;
     display: inline-block;
-    width: 20%;
-    margin: 15px 22px;
+    width: 21.6%;
+    margin: 15px 12px 15px 22px;
 }
 
 #aside h2 {
@@ -162,11 +178,11 @@ textarea {
 
 #mainSection {
     display: inline-block;
-    width: 72%;
+    width: 70%;
     vertical-align: top;
     margin:15px 10px 20px;
     border:2px solid #fff;
-
+    background-color: #999;
 }
 
 .asideForums {

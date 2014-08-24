@@ -31,9 +31,9 @@
 <div id="wrapper">
 
     <header>
-        <h1>The best forum ever!!!</h1>
+        <h1>Space Odisey Forum</h1>
 
-        <h2>(: You just have to love it :)</h2>
+        <h2>Welcome to our space adventure</h2>
         <ul>
             <li>
                 <button id="loginButton">Login</button>

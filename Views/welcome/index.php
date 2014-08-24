@@ -15,6 +15,8 @@
             '<label for="passLogin">Password</label>' +
             '<input type="password" id="passLogin"/>' +
             '<button onclick="login();">Submit</button>');
+            $('#response').html('');
+
     });
     registerButton.click(function () {
 
@@ -26,6 +28,7 @@
             '<label for="passRepeat">Repeat password</label>' +
             '<input type="password" id="passRepeat"/>' +
             '<button>Submit</button>');
+        $('#response').html('');
     });
 
 
