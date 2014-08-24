@@ -160,24 +160,33 @@ textarea {
     margin-top: 15px;
 }
 
-#aside {
-    list-style-type: none;
-    border: 2px solid #fff;
-    display: inline-block;
-    width: 21.6%;
-    margin: 15px 12px 15px 22px;
+table {
+    width: 100%;
+    border: 1px solid #000;
+    border-collapse: collapse;
 }
 
-#aside h2 {
-    text-shadow: 1px 1px #fff;
+th, td {
+    border: 1px solid #000;
 }
 
-.aside {
-    padding: 20px 10px;
-}
+/*#aside {*/
+    /*list-style-type: none;*/
+    /*border: 2px solid #fff;*/
+    /*display: inline-block;*/
+    /*width: 100%;*/
+    /*margin: 15px 12px 15px 22px;*/
+/*}*/
+
+/*#aside h2 {*/
+    /*text-shadow: 1px 1px #fff;*/
+/*}*/
+
+/*.aside {*/
+    /*padding: 20px 10px;*/
+/*}*/
 
 #mainSection {
-    display: inline-block;
     width: 70%;
     vertical-align: top;
     margin:15px 10px 20px;
@@ -185,14 +194,14 @@ textarea {
     background-color: #999;
 }
 
-.asideForums {
-    list-style-type: none;
-    padding: 10px 20px;
-    border-top: 1px solid black;
-    border-bottom: 1px solid black;
-    cursor: pointer;
+/*.asideForums {*/
+    /*list-style-type: none;*/
+    /*padding: 10px 20px;*/
+    /*border-top: 1px solid black;*/
+    /*border-bottom: 1px solid black;*/
+    /*cursor: pointer;*/
     /*display: none;*/
-}
+/*}*/
 
 footer {
     padding: 5px;

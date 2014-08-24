@@ -1,8 +1,40 @@
 <section id="loginRegisterField">
     <h2>Login if you are a member</h2>
+
     <h2>Register if you're not</h2>
 </section>
 
+<table class="mainTable">
+    <tr>
+        <th>
+            <a href="#">Category</a>
+        </th>
+        <th>
+            Topics
+        </th>
+        <th>
+            Posts
+        </th>
+        <th>
+            Last post
+        </th>
+    </tr>
+    <tr>
+        <td>
+            <a href="<?=$this->url('forums', 'view', 'id', 1);?>"> Slyncheva sistema</a>
+        </td>
+        <td>
+            20
+        </td>
+        <td>
+            288
+        </td>
+        <td>
+            by<a href="#"> RoYaLL</a><br/>
+            <span>Fri Oct,2014 8:20pm</span>
+        </td>
+    </tr>
+</table>
 <script>
     var loginRegisterField = $('#loginRegisterField');
     var loginButton = $('#loginButton');
@@ -15,7 +47,7 @@
             '<label for="passLogin">Password</label>' +
             '<input type="password" id="passLogin"/>' +
             '<button onclick="login();">Submit</button>');
-            $('#response').html('');
+        $('#response').html('');
 
     });
     registerButton.click(function () {
