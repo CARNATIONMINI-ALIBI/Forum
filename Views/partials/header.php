@@ -64,7 +64,7 @@
         <?php endif; ?>
         <div id="search">
             <input type="text" id="searchbox" placeholder="search..."/>
-            <button onclick="searchTopics()">Search</button>
+            <button onclick="searchTopics()">find</button>
         </div>
         <div id="topics"></div>
     </header>

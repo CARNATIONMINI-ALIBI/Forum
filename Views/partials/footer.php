@@ -1,4 +1,3 @@
-</div>
 </main>
 <footer>
     <p>Powered By ANSR Framework</p>

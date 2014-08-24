@@ -45,7 +45,7 @@ textarea {
 #wrapper {
     width: 70%;
     margin: 50px auto;
-    background: rgba(0,80,80, 1);
+    background: rgba(44,71,98, .7);
 
 }
 
@@ -106,7 +106,7 @@ textarea {
 }
 
 #search input {
-    width: 56%;
+    width: 70%;
 }
 
 #loginRegisterField {
@@ -126,10 +126,11 @@ textarea {
     font-size: 19px;
     margin: 0 auto 5px;
     width: 50%;
+    color: #fff;
+    text-shadow: 1px 1px #000;
 }
 
 #loginRegisterField button {
-    width: 40%;
     display:block;
     margin: 20px auto 15px;
 }
