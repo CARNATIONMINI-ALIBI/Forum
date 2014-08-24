@@ -65,9 +65,9 @@ class UserModel extends Model {
         
         $result = $this->getDb()->query("SELECT id FROM users WHERE username = '$username';");
         
-        $row = $this->getDb()->fetch($result)[0];
+        $rows = $this->getDb()->fetch($result);
         
-        return $row['id'];
+        return isset($rows[0]) ? $rows[0]['id'] : 0;
     }
 
     public function getRole($user_id) {

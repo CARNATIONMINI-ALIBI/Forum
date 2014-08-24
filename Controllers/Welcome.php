@@ -7,5 +7,8 @@ namespace ANSR\Controllers;
  * @author Ivan Yonkov <ivanynkv@gmail.com>
  */
 class Welcome extends Controller {
-    public function index() { }
+    public function index() {
+        $forums = $this->getApp()->ForumModel->getForums();
+        $this->getView()->forums = $forums;
+    }
 }

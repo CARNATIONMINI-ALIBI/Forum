@@ -57,4 +57,55 @@ class ForumModel extends Model {
         $this->getDb()->query("DELETE FROM forums WHERE id = " . intval($id));
         return $this->getDb()->affectedRows() > 0;
     }
+    
+    public function getPostsCount($forum_id) {
+        $forum_id = intval($forum_id);
+
+        $result = $this->getDb()->query("SELECT COUNT(*) AS cnt FROM forums f INNER JOIN topics t ON f.id = t.forum_id INNER JOIN answers a ON a.topic_id = t.id WHERE f.id = $forum_id");
+    
+        $rows = $this->getDb()->fetch($result);
+        
+        return isset($rows[0]['cnt']) ? $rows[0]['cnt'] : 0;
+    }
+    
+    public function getTopicsCount($forum_id) {
+        $forum_id = intval($forum_id);
+        
+        $result = $this->getDb()->query("SELECT COUNT(*) AS cnt FROM forums f INNER JOIN topics t ON f.id = t.forum_id WHERE f.id = $forum_id");
+    
+        $rows = $this->getDb()->fetch($result);
+        
+        return isset($rows[0]['cnt']) ? $rows[0]['cnt'] : 0;
+    }
+    
+    public function getLastAuthorInfo($forum_id) {
+        $forum_id = intval($forum_id);
+        $result = $this->getDb()->query("
+            SELECT 
+                u.username, a.created_on 
+            FROM 
+                forums f 
+            INNER JOIN 
+                topics t 
+            ON 
+                f.id = t.forum_id 
+            INNER JOIN 
+                answers a
+            ON 
+                a.topic_id = t.id
+            INNER JOIN
+                users u
+            ON 
+                a.user_id = u.id
+            WHERE 
+                f.id = $forum_id
+            ORDER BY
+                created_on DESC
+            LIMIT 1"
+        );
+
+        $rows = $this->getDb()->fetch($result);
+        
+        return isset($rows[0]) ? $rows[0] : array('username' => 'No author', 'created_on' => '');
+    }
 }

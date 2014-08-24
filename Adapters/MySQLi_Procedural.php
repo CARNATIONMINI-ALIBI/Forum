@@ -17,6 +17,8 @@ class MySQLi_Procedural extends Database {
     }
 
     public function fetch($result) {
+        $rows = [];
+        
         while ($row = mysqli_fetch_assoc($result)) {
             $rows[] = $row;
         }

@@ -1,3 +1,4 @@
+<?php /* @var $this \ANSR\View */ ?>
 <section id="loginRegisterField">
     <h2>Login if you are a member</h2>
 
@@ -19,21 +20,24 @@
             Last post
         </th>
     </tr>
+    <?php foreach ($this->forums as $forum): ?>
+    <?php $userInfo = $this->getFrontController()->getController()->getApp()->ForumModel->getLastAuthorInfo($forum['id']);?>
     <tr>
         <td>
-            <a href="<?=$this->url('forums', 'view', 'id', 1);?>"> Slyncheva sistema</a>
+            <a href="<?=$this->url('forums', 'view', 'id', $forum['id']);?>"> <?= $forum['name']; ?> </a>
         </td>
         <td>
-            20
+            <?= $this->getFrontController()->getController()->getApp()->ForumModel->getTopicsCount($forum['id']); ?>
         </td>
         <td>
-            288
+            <?= $this->getFrontController()->getController()->getApp()->ForumModel->getPostsCount($forum['id']); ?>
         </td>
         <td>
-            by<a href="#"> RoYaLL</a><br/>
-            <span>Fri Oct,2014 8:20pm</span>
+            by <a href="<?= $this->url('users', 'profiles', 'id', $this->getFrontController()->getController()->getApp()->UserModel->getIdByUsername($userInfo['username']));?>"><?= $userInfo['username']; ?></a><br/>
+            <span><?= $userInfo['created_on']; ?></span>
         </td>
     </tr>
+    <?php endforeach; ?>
 </table>
 <script>
     var loginRegisterField = $('#loginRegisterField');
