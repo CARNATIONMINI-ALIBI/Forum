@@ -44,6 +44,11 @@ class Users extends Controller {
     public function isModerator() {
         return $this->getApp()->UserModel->getRole($_SESSION['user_id']) == \ANSR\Models\UserModel::ROLE_MODERATOR;
     }
+    
+    public function logout() {
+        session_destroy();
+        exit;
+    }
 
 }
 

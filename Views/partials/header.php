@@ -1,3 +1,4 @@
+<?php /* @var $this \ANSR\View */ ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -24,6 +25,16 @@
                 }
             });
         }
+
+        $(document).ready(function() {
+           $("#logoutButton").click(function () {
+            $.post("<?=$this->url('users', 'logout');?>", {
+                
+            }).done(function () {
+                window.location = "<?=$this->url('welcome', 'index');?>";
+            });
+           }) 
+        });
     </script>
 </head>
 
@@ -34,6 +45,7 @@
         <h1>Space Odisey Forum</h1>
 
         <h2>Welcome to our space adventure</h2>
+        <?php if (!$this->getFrontController()->getController()->getApp()->UserModel->isLogged()): ?>
         <ul>
             <li>
                 <button id="loginButton">Login</button>
@@ -42,6 +54,14 @@
                 <button id="registerButton">Register</button>
             </li>
         </ul>
+        <?php else: ?>
+        <ul>
+            <li>
+                <button id="logoutButton">Logout</button>
+            </li>
+        </ul>
+        <h1>Welcome <?=$_SESSION['username'];?></h1>
+        <?php endif; ?>
         <div id="search">
             <input type="text" id="searchbox" placeholder="search..."/>
             <button onclick="searchTopics()">Search</button>

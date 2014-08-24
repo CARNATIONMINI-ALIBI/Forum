@@ -38,6 +38,7 @@ class UserModel extends Model {
 
         if ($this->userExists($username, $password)) {
             $_SESSION['user_id'] = $this->getIdByUsername($username);
+            $_SESSION['username'] = $username;
             return true;
         }
         return false;
@@ -86,5 +87,10 @@ class UserModel extends Model {
     public function isModerator($user_id) {
         return $this->getRole($user_id) == self::ROLE_MODERATOR;
     }
+    
+    public function isLogged() {
+        return isset($_SESSION['user_id']);
+    }
+    
 }
 
