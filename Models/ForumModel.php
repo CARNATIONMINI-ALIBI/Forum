@@ -17,7 +17,7 @@ class ForumModel extends Model {
     public function getForumById($id) {
         $result = $this->getDb()->query("SELECT id, name, category_id, order_id FROM forums WHERE id = " . intval($id));
         
-        return $this->getDb()->fetch($result)[0];
+        return $this->getDb()->row($result);
     }
     
     public function getForums() {
@@ -34,7 +34,7 @@ class ForumModel extends Model {
         return $this->getDb()->affectedRows() > 0;
     }
     
-    public function edit($name, $category_id = null, $order_id = null) {
+    public function edit($id, $name, $category_id = null, $order_id = null) {
         $name = $this->getDb()->escape($name);
         $query = "UPDATE forums SET name = '$name' ";
         
@@ -63,9 +63,9 @@ class ForumModel extends Model {
 
         $result = $this->getDb()->query("SELECT COUNT(*) AS cnt FROM forums f INNER JOIN topics t ON f.id = t.forum_id INNER JOIN answers a ON a.topic_id = t.id WHERE f.id = $forum_id");
     
-        $rows = $this->getDb()->fetch($result);
+        $row = $this->getDb()->row($result);
         
-        return isset($rows[0]['cnt']) ? $rows[0]['cnt'] : 0;
+        return isset($row['cnt']) ? $row['cnt'] : 0;
     }
     
     public function getTopicsCount($forum_id) {
@@ -73,9 +73,9 @@ class ForumModel extends Model {
         
         $result = $this->getDb()->query("SELECT COUNT(*) AS cnt FROM forums f INNER JOIN topics t ON f.id = t.forum_id WHERE f.id = $forum_id");
     
-        $rows = $this->getDb()->fetch($result);
-        
-        return isset($rows[0]['cnt']) ? $rows[0]['cnt'] : 0;
+        $row = $this->getDb()->row($result);
+
+        return isset($row['cnt']) ? $row['cnt'] : 0;
     }
     
     public function getLastAuthorInfo($forum_id) {
@@ -104,8 +104,8 @@ class ForumModel extends Model {
             LIMIT 1"
         );
 
-        $rows = $this->getDb()->fetch($result);
+        $row = $this->getDb()->row($result);
         
-        return isset($rows[0]) ? $rows[0] : array('username' => 'No author', 'created_on' => '');
+        return !empty($row) ? $row : array('username' => 'No author', 'created_on' => '');
     }
 }

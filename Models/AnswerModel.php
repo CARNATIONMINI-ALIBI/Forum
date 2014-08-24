@@ -26,7 +26,7 @@ class AnswerModel extends Model {
         $id = intval($id);
         $result = $this->getDb()->query("SELECT id, body, topic_id, created_on, user_id FROM answers WHERE id = $id");
         
-        return $this->getDb()->fetch($result)[0];
+        return $this->getDb()->row($result);
     }
     
     public function getAnswers() {

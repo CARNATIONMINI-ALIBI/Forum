@@ -17,7 +17,7 @@ class CategoryModel extends Model {
     public function getCategoryById($id) {
          $result = $this->getDb()->query("SELECT id, name, order_id FROM categories WHERE $id = " . intval($id));
         
-        return $this->getDb()->fetch($result)[0];
+        return $this->getDb()->row($result);
     }
     
     public function add($name) {

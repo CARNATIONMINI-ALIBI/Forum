@@ -55,7 +55,7 @@ class UserModel extends Model {
         
         $result = $this->getDb()->query($query);
         
-        $row = $this->getDb()->fetch($result)[0];
+        $row = $this->getDb()->row($result);
         
         return $row['cnt'] > 0;
     }
@@ -65,9 +65,9 @@ class UserModel extends Model {
         
         $result = $this->getDb()->query("SELECT id FROM users WHERE username = '$username';");
         
-        $rows = $this->getDb()->fetch($result);
+        $row = $this->getDb()->row($result);
         
-        return isset($rows[0]) ? $rows[0]['id'] : 0;
+        return isset($row['id']) ? $row['id'] : 0;
     }
     
     public function getUsernameById($id) {
@@ -75,9 +75,9 @@ class UserModel extends Model {
         
         $result = $this->getDb()->query("SELECT username FROM users WHERE id = $id");
         
-        $rows = $this->getDb()->fetch($result);
+        $row = $this->getDb()->row($result);
         
-        return isset($rows[0]) ? $rows[0]['username'] : '';
+        return isset($row['username']) ? $row['username'] : '';
     }
 
     public function getRole($user_id) {
@@ -85,7 +85,7 @@ class UserModel extends Model {
 
         $result = $this->getDb()->query("SELECT role_id FROM users WHERE id = '$user_id';");
 
-        $row = $this->getDb()->fetch($result)[0];
+        $row = $this->getDb()->row($result);
 
         return $row['role_id'];
     }

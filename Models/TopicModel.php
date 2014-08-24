@@ -26,7 +26,7 @@ class TopicModel extends Model {
         $id = intval($id);
         $result = $this->getDb()->query("SELECT id, summary, body, forum_id, created_on, user_id, views FROM topics WHERE id = $id");
         
-        return $this->getDb()->fetch($result)[0];
+        return $this->getDb()->row($result);
     }
     
     public function getTopics() {
@@ -88,19 +88,19 @@ class TopicModel extends Model {
 
         $result = $this->getDb()->query("SELECT COUNT(*) AS cnt FROM topics t INNER JOIN answers a ON t.id = a.topic_id WHERE t.id = $topic_id");
     
-        $rows = $this->getDb()->fetch($result);
+        $row = $this->getDb()->row($result);
         
-        return isset($rows[0]['cnt']) ? $rows[0]['cnt'] : 0;
+        return isset($row['cnt']) ? $row['cnt'] : 0;
     }
 
-        public function getLastAuthorInfo($topic_id) {
+    public function getLastAuthorInfo($topic_id) {
         $topic_id = intval($topic_id);
         $result = $this->getDb()->query("
             SELECT u.username, a.created_on FROM topics t INNER JOIN answers a ON t.id = a.topic_id INNER JOIN users u ON u.id = a.user_id WHERE t.id = $topic_id ORDER BY created_on DESC LIMIT 1"
         );
 
-        $rows = $this->getDb()->fetch($result);
+        $row = $this->getDb()->row($result);
         
-        return isset($rows[0]) ? $rows[0] : array('username' => 'No author', 'created_on' => '');
+        return !empty($row) ? $row : array('username' => 'No author', 'created_on' => '');
     }
 }

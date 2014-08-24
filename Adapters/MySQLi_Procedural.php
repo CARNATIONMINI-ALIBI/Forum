@@ -40,7 +40,11 @@ class MySQLi_Procedural extends Database {
     }
 
     public function row($result) {
-        return mysqli_fetch_row($result);
+        $row = $this->fetch($result);
+        if (isset($row[0])) {
+            return $row[0];
+        }
+        return array();
     }
 
     public function result($result, $row = null) {
@@ -77,5 +81,4 @@ class MySQLi_Procedural extends Database {
     public function lastId() {
         return mysqli_insert_id($this->_conn);
     }
-
 }
