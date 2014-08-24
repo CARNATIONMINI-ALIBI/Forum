@@ -40,6 +40,11 @@
     <?php endforeach; ?>
 </table>
 <script>
+    
+    $(document).ready(function() {
+        
+    });
+    
     var loginRegisterField = $('#loginRegisterField');
     var loginButton = $('#loginButton');
     var registerButton = $('#registerButton');
@@ -50,9 +55,20 @@
             '<input type="text" id="userLogin"/>' +
             '<label for="passLogin">Password</label>' +
             '<input type="password" id="passLogin"/>' +
-            '<button onclick="login();">Submit</button>');
+            '<button id="submit" onclick="login();">Submit</button>');
         $('#response').html('');
-
+        
+        $("#userLogin").keypress(function(e) {
+           if (e.keyCode == 13) {
+               $("#submit").click();
+           } 
+        });
+        
+        $("#passLogin").keypress(function(e) {
+           if (e.keyCode == 13) {
+               $("#submit").click();
+           } 
+        });
     });
     registerButton.click(function () {
 
