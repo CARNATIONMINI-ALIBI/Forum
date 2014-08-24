@@ -61,7 +61,7 @@ textarea {
 }
 
 #wrapper header h2 {
-    font-size: 1.2rem;
+    font-size: 1.4rem;
     text-align: center;
     padding: 5px;
     background: rgba(255, 255, 255, .7);
@@ -126,13 +126,49 @@ textarea {
     font-size: 19px;
     margin: 0 auto 5px;
     width: 50%;
-    color: #fff;
+    color:#fff;
     text-shadow: 1px 1px #000;
 }
+
+#loginRegisterField input {
+    color: #000;
+    text-shadow: none;
+}
+
 
 #loginRegisterField button {
     display:block;
     margin: 20px auto 15px;
+}
+
+#response {
+    width: 99%;
+    color: #f00;
+    padding: 5px;
+    margin: 25px auto 0;
+    text-transform: uppercase;
+}
+
+#response h2 {
+    text-align: center;
+}
+
+/*Search results*/
+
+#topics {
+    margin: 25px 22px 0 22px;
+}
+
+#topics a {
+    color: #fff;
+    font-size: 19px;
+    display: block;
+}
+.noResults {
+    color: red;
+    text-align: center;
+    margin-top: 50px;
+    font-size: 25px;
 }
 
 #addTopic {
@@ -169,10 +205,11 @@ textarea {
 }
 
 table {
-    width: 100%;
+    width: 96%;
     border: 1px solid #000;
     border-collapse: collapse;
-    background: rgba(255,255,255, .6)
+    background: rgba(255,255,255, .6);
+    margin: 0 auto 20px;
 }
 
 th, td {

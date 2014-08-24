@@ -1,10 +1,9 @@
 <?php /* @var $this \ANSR\View */ ?>
+<div id="response"></div>
 <section id="loginRegisterField">
     <h2>Login if you are a member</h2>
-
     <h2>Register if you're not</h2>
 </section>
-
 <table class="mainTable">
     <tr>
         <th>
@@ -40,11 +39,11 @@
     <?php endforeach; ?>
 </table>
 <script>
-    
+
     $(document).ready(function() {
-        
+
     });
-    
+
     var loginRegisterField = $('#loginRegisterField');
     var loginButton = $('#loginButton');
     var registerButton = $('#registerButton');
@@ -57,17 +56,18 @@
             '<input type="password" id="passLogin"/>' +
             '<button id="submit" onclick="login();">Submit</button>');
         $('#response').html('');
-        
+        $('#topics').html('');
+
         $("#userLogin").keypress(function(e) {
            if (e.keyCode == 13) {
                $("#submit").click();
-           } 
+           }
         });
-        
+
         $("#passLogin").keypress(function(e) {
            if (e.keyCode == 13) {
                $("#submit").click();
-           } 
+           }
         });
     });
     registerButton.click(function () {
@@ -81,6 +81,7 @@
             '<input type="password" id="passRepeat"/>' +
             '<button>Submit</button>');
         $('#response').html('');
+        $('#topics').html('');
     });
 
 
@@ -98,4 +99,3 @@
         });
     }
 </script>
-<div id="response"></div>

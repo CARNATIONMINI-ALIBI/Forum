@@ -11,16 +11,21 @@
     <script>
 
         function searchTopics() {
+            $('#loginRegisterField').html('');
+            $('#topics').html('');
+            $('#response').html('');
+
             $.post("<?=$this->url('topics', 'find');?>", {
                 keyword: $('#searchbox').val()
             }).done(function (response) {
                 var json = $.parseJSON(response);
                 if (json.success == 0) {
-                    alert('nishto');
+                    $('#topics').html('<p class="noResults">No results found</p>')
                 } else {
+                    $('#topics').html('<h2>Search results</h2>')
                     $.each(json, function (i, item) {
                         var href = "<a href='<?=HOST;?>topics/view/id/" + item.id + "'>" + item.summary + "</a><br />";
-                        $("#topics").append(href);
+                        $('#topics').append(href);
                     })
                 }
             });
@@ -42,7 +47,7 @@
 <div id="wrapper">
 
     <header>
-        <h1>Space Odisey Forum</h1>
+        <h1>Space Odyssey Forum</h1>
 
         <h2>Welcome to our space adventure</h2>
         <?php if (!$this->getFrontController()->getController()->getApp()->UserModel->isLogged()): ?>
