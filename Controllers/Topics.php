@@ -19,12 +19,11 @@ class Topics extends Controller
     public function view()
     {
         if ($this->getRequest()->getParam('id')) {
-            $result = $this->getApp()->TopicModel->getTopicById($this->getRequest()->getParam('id'));
-            $this->getView()->topic = $result;
-        } elseif ($this->getRequest()->getParam('forumid')) {
-            $result = $this->getApp()->TopicModel->getTopicsByForumId($this->getRequest()->getParam('forumid'));
-//            $this->getView()->topic = $result;
-
+            $topic = $this->getApp()->TopicModel->getTopicById($this->getRequest()->getParam('id'));
+            $answers = $this->getapp()->AnswerModel->getAnswersByTopicId($this->getRequest()->getParam('id'));
+            
+            $this->getView()->topic = $topic;
+            $this->getView()->answers = $answers;
         }
     }
 
