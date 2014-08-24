@@ -9,10 +9,12 @@ namespace ANSR\Controllers;
 class Forums extends Controller {
     
     public function view() {
-        if ($this->getRequest()->getParam('categoryid')) {
-            $result = $this->getApp()->ForumModel->getForumsByCategoryId($this->getRequest()->getParam('categoryid'));
+        if ($this->getRequest()->getParam('id')) {
+            $result = $this->getApp()->TopicModel->getTopicsByForumId($this->getRequest()->getParam('id'));
             
-            $this->getView()->forums = $result;
+            $this->getView()->topics = $result;
+            $this->getView()->forum = $this->getApp()->ForumModel->getForumById($this->getRequest()->getParam('id'));
+            $this->getView()->forums = $this->getApp()->ForumModel->getForums();
         }
     }
     
