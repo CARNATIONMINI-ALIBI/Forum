@@ -1,3 +1,4 @@
+<?php $position  = 1; ?>
 <table class="online">
     <tr>
         <th>#</th>
@@ -6,11 +7,13 @@
         <th>Joined</th>
         <th>Posts</th>
     </tr>
+    <?php foreach ($this->users as $user): ?>
     <tr>
-        <td>1</td>
-        <td><a href="#">RoYaLL</a></td>
-        <td><a href="mailto:myemail@gmail.com">myemail@gmail.com</a></td>
-        <td>25 Aug 2014  03:47 PM</td>
-        <td>42</td>
+        <td><?= $position; ?></td>
+        <td><a href="<?= $this->url('users', 'profile', 'id', $user['id']);?>"><?= $user['username']; ?></a></td>
+        <td><a href="mailto:<?= $user['email']; ?>"><?= $user['email']; ?></a></td>
+        <td><?= $user['register_date']; ?></td>
+        <td><?= $user['posts']; ?></td>
     </tr>
+    <?php endforeach; ?>
 </table>

@@ -13,6 +13,9 @@ class UserModel extends Model {
     const ROLE_ADMINISTRATOR = 3;
     
     const INTERVAL_ONLINE_MINUTES = 15;
+    
+    const RANKING_TYPE_POSTS = 'posts';
+    const RANKING_TYPE_UPVOTES = 'votes';
 
     public function register($username, $password, $email, $avatar = null, $role_id = self::ROLE_USER) {
         $username = $this->getDb()->escape($username);
@@ -157,6 +160,39 @@ class UserModel extends Model {
         }
         
         return $rows;
+    }
+    
+    public function getUsers($ranking = null) {
+        $query = "
+            SELECT 
+                users.id, username, email, role_id, votes, (COUNT(answers.id) + COUNT(topics.id)) AS posts, register_date
+            FROM
+                users
+            INNER JOIN
+                answers
+            ON
+                users.id = answers.user_id
+            INNER JOIN
+                topics
+            ON
+                users.id = topics.user_id
+            GROUP BY
+                users.id    
+        ";
+        
+        switch ($ranking):
+            case self::RANKING_TYPE_POSTS:
+                $query .= " ORDER BY posts DESC";
+                break;
+            case self::RANKING_TYPE_UPVOTES:
+                $query .= " ORDER BY votes DESC";
+            default:
+                break;
+        endswitch;
+        
+        $result = $this->getDb()->query($query);
+        
+        return $this->getDb()->fetch($result);
     }
     
 }
