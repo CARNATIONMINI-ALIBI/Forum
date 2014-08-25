@@ -36,6 +36,10 @@ class Users extends Controller {
         
          return die(json_encode(array('success' => 0, 'msg' => 'User exists or missing credentials')));
     }
+    
+    public function online() {
+        $this->getView()->users = $this->getApp()->UserModel->getOnlineUsers();
+    }
 
     public function isAdmin() {
         return $this->getApp()->UserModel->getRole($_SESSION['user_id']) == \ANSR\Models\UserModel::ROLE_ADMINISTRATOR;

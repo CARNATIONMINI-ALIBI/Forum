@@ -11,6 +11,8 @@ class UserModel extends Model {
     const ROLE_USER = 1;
     const ROLE_MODERATOR = 2;
     const ROLE_ADMINISTRATOR = 3;
+    
+    const INTERVAL_ONLINE_MINUTES = 15;
 
     public function register($username, $password, $email, $avatar = null, $role_id = self::ROLE_USER) {
         $username = $this->getDb()->escape($username);
@@ -24,9 +26,9 @@ class UserModel extends Model {
         $result = $this->getDb()->query("
             INSERT INTO 
                 users 
-            (username, password, email, avatar, role_id, register_date) 
+            (username, password, email, avatar, role_id, register_date, last_click, last_page) 
                 VALUES
-            ('$username', '$password', '$email', '$avatar', '$role_id', NOW());
+            ('$username', '$password', '$email', '$avatar', '$role_id', NOW(), NOW(), 'users/register');
         ");
         
         return $this->getDb()->affectedRows() > 0;
@@ -42,6 +44,14 @@ class UserModel extends Model {
             return true;
         }
         return false;
+    }
+    
+    public function updateLastClick($user_id, $page) {
+        $user_id = intval($user_id);
+        
+        $this->getDb()->query("UPDATE users SET last_click = NOW(), last_page = '$page' WHERE id = $user_id");
+        
+        return $this->getDb()->affectedRows() > 0;
     }
     
     public function userExists($username, $password = null) {
@@ -108,6 +118,45 @@ class UserModel extends Model {
         $row = $this->getDb()->row($result);
         
         return !empty($row) ? $row : ['id' => 0, 'username' => 'Np user'];
+    }
+    
+    public function getOnlineUsers() {
+        $result = $this->getDb()->query("SELECT id, username, last_click, last_page FROM users WHERE last_click > DATE_SUB(NOW(), INTERVAL " . self::INTERVAL_ONLINE_MINUTES . " MINUTE);");
+        
+        $rows = $this->getDb()->fetch($result);
+        
+        foreach ($rows as &$row) {
+            switch ($row['last_page']):
+                case 'Welcome/index':
+                    $row['page'] = 'Viewing index';
+                    break;
+                case 'Froums/view':
+                    $row['page'] = 'Viewing a forum';
+                    break;
+                case 'Topics/view':
+                case 'Topics/all':
+                    $row['page'] = 'Reading a topic';
+                    break;
+                case 'Topics/add':
+                    $row['page'] = 'Writing a topic';
+                    break;
+                case 'Answers/add':
+                    $row['page'] = 'Answering to a topic';
+                    break;
+                case 'Users/online':
+                    $row['page'] = 'Reviewing who is online';
+                    break;
+                default:
+                    $row['page'] = $row['last_page'];
+                    break;
+            endswitch;
+            
+            $params = explode('/', $row['last_page']);
+            $row['controller'] = $params[0];
+            $row['action'] = $params[1];
+        }
+        
+        return $rows;
     }
     
 }

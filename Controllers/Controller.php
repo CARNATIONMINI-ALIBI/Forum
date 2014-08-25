@@ -29,7 +29,11 @@ abstract class Controller {
         $this->getView()->initFooter();
     }
 
-    protected function init() { }
+    protected function init() {
+        if ($this->getApp()->UserModel->isLogged()) {
+            $this->getApp()->UserModel->updateLastClick($_SESSION['user_id'], $this->getView()->getFrontController()->getRouter()->getController() . '/' .  $this->getView()->getFrontController()->getRouter()->getAction());
+        }
+    }
 
     /**
      * @return \ANSR\App
