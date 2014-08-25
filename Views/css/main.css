@@ -5,7 +5,7 @@
 
 
 
-html, body, ul, li, form, a, section, article, main, header, footer, div, h1, h2, h3, h4, h5, h6 {
+html, body, ul, li, form, p, a, section, article, main, header, footer, div, h1, h2, h3, h4, h5, h6 {
     margin: 0;
     padding: 0;
 }
@@ -263,7 +263,30 @@ footer {
     color: #fff;
 }
 
-footer p {
+footer .whoIsOnline {
+    padding: 10px;
+}
+
+.whoIsOnline div {
+    border: 1px solid #fff;
+    padding: 5px;
+    margin: 5px;
+}
+
+.whoIsOnline div span {
+    color: yellow;
+}
+
+.whoIsOnline div a {
+    color: red;
+}
+
+.whoIsOnline h3 {
+    color: red;
+    padding: 5px;
+}
+
+footer h4 {
     text-align: center;
 }
 
