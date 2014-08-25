@@ -100,6 +100,13 @@ textarea {
     padding: 2px 0;
 }
 
+#wrapper header h2.welcomeUser {
+    margin: 15px;
+    background-color: transparent;
+    color:red;
+    text-shadow: 1px 1px #000;
+}
+
 #search {
     width: 30%;
     display: inline-block;

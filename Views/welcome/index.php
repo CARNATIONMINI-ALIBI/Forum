@@ -40,9 +40,6 @@
 </table>
 <script>
 
-    $(document).ready(function() {
-
-    });
 
     var loginRegisterField = $('#loginRegisterField');
     var loginButton = $('#loginButton');
@@ -79,9 +76,26 @@
             '<input type="password" id="passRegister"/>' +
             '<label for="passRepeat">Repeat password</label>' +
             '<input type="password" id="passRepeat"/>' +
-            '<button>Submit</button>');
+            '<button id="submit" onclick="register();">Submit</button>');
         $('#response').html('');
         $('#topics').html('');
+        $("#userRegister").keypress(function(e) {
+            if (e.keyCode == 13) {
+                $("#submit").click();
+            }
+        });
+
+        $("#passRegister").keypress(function(e) {
+            if (e.keyCode == 13) {
+                $("#submit").click();
+            }
+        });
+        $("#passRepeat").keypress(function(e) {
+            if (e.keyCode == 13) {
+                $("#submit").click();
+            }
+        });
+
     });
 
 
@@ -92,10 +106,16 @@
         }).done(function (response) {
             var json = $.parseJSON(response);
             if (json.success == 1) {
+                $('#response').html('');
                 window.location = "<?=$this->url('topics', 'all');?>";
             } else {
                 $('#response').html('<h2 class="incorrect">' + 'Incorrect username or password' + '</h2>');
             }
         });
+    }
+
+    function register() {
+
+        alert('Register')
     }
 </script>

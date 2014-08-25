@@ -49,7 +49,7 @@
     <header>
         <h1>Space Odyssey Forum</h1>
 
-        <h2>Welcome to our space adventure</h2>
+        <h2>Space Adventure</h2>
         <?php if (!$this->getFrontController()->getController()->getApp()->UserModel->isLogged()): ?>
         <ul>
             <li>
@@ -65,12 +65,12 @@
                 <button id="logoutButton">Logout</button>
             </li>
         </ul>
-        <h1>Welcome <?=$_SESSION['username'];?></h1>
         <?php endif; ?>
         <div id="search">
             <input type="text" id="searchbox" placeholder="search..."/>
             <button onclick="searchTopics()">find</button>
         </div>
+        <h2 class="welcomeUser">Welcome <?=$_SESSION['username'];?></h2>
         <div id="topics"></div>
     </header>
     <main>
