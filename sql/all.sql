@@ -14,9 +14,12 @@ CREATE TABLE IF NOT EXISTS `answers` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB;
 
--- Dumping data for table forum.answers: ~0 rows (approximately)
+-- Dumping data for table forum.answers: ~2 rows (approximately)
 DELETE FROM `answers`;
 /*!40000 ALTER TABLE `answers` DISABLE KEYS */;
+INSERT INTO `answers` (`id`, `body`, `topic_id`, `created_on`, `user_id`) VALUES
+	(1, 'xxxx', 2, '2014-08-24 16:43:39', 1),
+	(2, 'Bez PHP', 2, '2014-08-24 16:43:52', 2);
 /*!40000 ALTER TABLE `answers` ENABLE KEYS */;
 
 
@@ -32,6 +35,8 @@ CREATE TABLE IF NOT EXISTS `categories` (
 -- Dumping data for table forum.categories: ~0 rows (approximately)
 DELETE FROM `categories`;
 /*!40000 ALTER TABLE `categories` DISABLE KEYS */;
+INSERT INTO `categories` (`id`, `name`, `order_id`) VALUES
+	(1, 'sdgfdfg', 1);
 /*!40000 ALTER TABLE `categories` ENABLE KEYS */;
 
 
@@ -45,9 +50,13 @@ CREATE TABLE IF NOT EXISTS `forums` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB;
 
--- Dumping data for table forum.forums: ~0 rows (approximately)
+-- Dumping data for table forum.forums: ~2 rows (approximately)
 DELETE FROM `forums`;
 /*!40000 ALTER TABLE `forums` DISABLE KEYS */;
+INSERT INTO `forums` (`id`, `name`, `category_id`, `order_id`) VALUES
+	(1, 'Domashni', 4, 1),
+	(2, 'Teamworks', 4, 2),
+	(3, 'Zapozananstava', 1, 1);
 /*!40000 ALTER TABLE `forums` ENABLE KEYS */;
 
 
@@ -57,9 +66,9 @@ CREATE TABLE IF NOT EXISTS `roles` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDD;
+) ENGINE=InnoDB;
 
--- Dumping data for table forum.roles: ~0 rows (approximately)
+-- Dumping data for table forum.roles: ~2 rows (approximately)
 DELETE FROM `roles`;
 /*!40000 ALTER TABLE `roles` DISABLE KEYS */;
 INSERT INTO `roles` (`id`, `name`) VALUES
@@ -78,14 +87,17 @@ CREATE TABLE IF NOT EXISTS `topics` (
   `forum_id` int(11) NOT NULL,
   `created_on` datetime NOT NULL,
   `user_id` int(11) NOT NULL,
+  `views` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB;
--- Dumping data for table forum.topics: ~0 rows (approximately)
+
+-- Dumping data for table forum.topics: ~2 rows (approximately)
 DELETE FROM `topics`;
 /*!40000 ALTER TABLE `topics` DISABLE KEYS */;
-INSERT INTO `topics` (`id`, `summary`, `body`, `forum_id`, `created_on`, `user_id`) VALUES
-	(1, 'dsfdg', 'sdfdfg', 1, '2014-08-20 21:12:37', 1),
-	(2, 'sdffdg', '123123', 1, '2014-08-20 21:14:25', 2);
+INSERT INTO `topics` (`id`, `summary`, `body`, `forum_id`, `created_on`, `user_id`, `views`) VALUES
+	(2, 'Homework PHP - Functions && objects', 'Na vi resheniqta', 1, '2014-08-20 21:14:25', 2, 0),
+	(3, 'Kak se pravi musaka', 'Molya vi kajete mi kak da si napravia musaka', 1, '2014-08-22 19:21:26', 2, 0),
+	(15, 'Kak se pravi vsichko', '?????', 1, '2014-08-24 16:47:19', 1, 0);
 /*!40000 ALTER TABLE `topics` ENABLE KEYS */;
 
 
@@ -98,11 +110,17 @@ CREATE TABLE IF NOT EXISTS `users` (
   `email` varchar(50) NOT NULL,
   `avatar` varchar(50) DEFAULT '0',
   `role_id` int(11) NOT NULL DEFAULT '0',
+  `register_date` datetime DEFAULT NULL,
+  `last_click` datetime DEFAULT NULL,
+  `last_page` varchar(50) DEFAULT NULL,
+  `votes` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB;
 
--- Dumping data for table forum.users: ~1 rows (approximately)
+-- Dumping data for table forum.users: ~3 rows (approximately)
 DELETE FROM `users`;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` (`id`, `username`, `password`, `email`, `avatar`, `role_id`) VALUES
-	(1, 'RoYaLL', '4297f44b13955235245b2497399d7a93', 'mymail@mail.bg', '', 1);
+INSERT INTO `users` (`id`, `username`, `password`, `email`, `avatar`, `role_id`, `register_date`, `last_click`, `last_page`, `votes`) VALUES
+	(1, 'RoYaLL', '202cb962ac59075b964b07152d234b70', 'mymail@mail.bg', '', 1, '2014-08-23 19:44:36', '2014-08-25 19:55:31', 'Users/logout', 100),
+	(2, 'GoShow', 'caf1a3dfb505ffed0d024130f58c5cfa', 'mymail@abv.bg', '', 1, '2014-08-25 18:53:47', '2014-08-25 19:22:57', 'Topics/all', 50),
+	(3, 'BaiHui', 'afsdgdfg', 'sgfdfg', '0', 0, '2014-08-25 18:53:41', '2014-08-25 19:06:47', 'Forums/view', NULL);
