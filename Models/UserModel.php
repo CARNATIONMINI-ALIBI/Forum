@@ -24,9 +24,9 @@ class UserModel extends Model {
         $result = $this->getDb()->query("
             INSERT INTO 
                 users 
-            (username, password, email, avatar, role_id) 
+            (username, password, email, avatar, role_id, register_date) 
                 VALUES
-            ('$username', '$password', '$email', '$avatar', '$role_id');
+            ('$username', '$password', '$email', '$avatar', '$role_id', NOW());
         ");
         
         return $this->getDb()->affectedRows() > 0;
@@ -100,6 +100,14 @@ class UserModel extends Model {
     
     public function isLogged() {
         return isset($_SESSION['user_id']);
+    }
+    
+    public function getLastRegisteredUser() {
+        $result = $this->getDb()->query("SELECT id, username, email, avatar, role_id, register_date FROM users ORDER BY register_date DESC LIMIT 1");
+        
+        $row = $this->getDb()->row($result);
+        
+        return !empty($row) ? $row : ['id' => 0, 'username' => 'Np user'];
     }
     
 }

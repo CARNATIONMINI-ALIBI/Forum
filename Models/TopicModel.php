@@ -103,4 +103,12 @@ class TopicModel extends Model {
         
         return !empty($row) ? $row : array('username' => 'No author', 'created_on' => '');
     }
+    
+    public function getTopicsCount() {
+        $result = $this->getDb()->query("SELECT COUNT(*) AS cnt FROM topics");
+        
+        $row = $this->getDb()->row($result);
+        
+        return !empty($row) ? $row['cnt'] : 0;
+    }
 }

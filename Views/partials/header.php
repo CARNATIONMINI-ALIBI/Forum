@@ -65,12 +65,12 @@
                 <button id="logoutButton">Logout</button>
             </li>
         </ul>
-        <?php endif; ?>
         <div id="search">
             <input type="text" id="searchbox" placeholder="search..."/>
             <button onclick="searchTopics()">find</button>
         </div>
         <h2 class="welcomeUser">Welcome <?=$_SESSION['username'];?></h2>
         <div id="topics"></div>
+        <?php endif; ?>
     </header>
     <main>
