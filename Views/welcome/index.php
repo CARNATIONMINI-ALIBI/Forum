@@ -1,7 +1,7 @@
 <?php /* @var $this \ANSR\View */ ?>
 <div id="response"></div>
 <section id="loginRegisterField">
-    
+
 </section>
 <table class="mainTable">
     <tr>
