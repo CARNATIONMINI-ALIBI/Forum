@@ -1,8 +1,7 @@
 <?php /* @var $this \ANSR\View */ ?>
 <div id="response"></div>
 <section id="loginRegisterField">
-    <h2>Login if you are a member</h2>
-    <h2>Register if you're not</h2>
+    
 </section>
 <table class="mainTable">
     <tr>
