@@ -1,5 +1,7 @@
 <section class="answer">
-    <input type="text" id="name" />
+    <label for="outername">Your Name</label>
+    <input type="text" id="outername" />
+    <label for="answer">Description</label>
     <textarea id="answer""></textarea>
     <button id="submitAnswer">Submit</button>
 </section>
