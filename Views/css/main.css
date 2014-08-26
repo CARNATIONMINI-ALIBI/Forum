@@ -229,24 +229,6 @@ table td a {
     color: red;
 }
 
-
-
-/*#aside {*/
-    /*list-style-type: none;*/
-    /*border: 2px solid #fff;*/
-    /*display: inline-block;*/
-    /*width: 100%;*/
-    /*margin: 15px 12px 15px 22px;*/
-/*}*/
-
-/*#aside h2 {*/
-    /*text-shadow: 1px 1px #fff;*/
-/*}*/
-
-/*.aside {*/
-    /*padding: 20px 10px;*/
-/*}*/
-
 #mainSection {
     width: 70%;
     vertical-align: top;
@@ -254,15 +236,6 @@ table td a {
     border:2px solid #fff;
     background-color: #999;
 }
-
-/*.asideForums {*/
-    /*list-style-type: none;*/
-    /*padding: 10px 20px;*/
-    /*border-top: 1px solid black;*/
-    /*border-bottom: 1px solid black;*/
-    /*cursor: pointer;*/
-    /*display: none;*/
-/*}*/
 
 footer {
     padding: 5px;
@@ -297,3 +270,28 @@ footer h4 {
     text-align: center;
 }
 
+/*Topics styling*/
+section h2 {
+    text-align: center;
+    color: red;
+}
+
+a.button {
+    text-decoration: none;
+    padding: 4px;
+    background:rgba(255,255,255, .6)
+}
+
+.topicOptions {
+    padding: 0 21px 21px 21px;
+}
+
+.topicButtons {
+    width: 66%;
+    display: inline-block;
+}
+
+.selectForums {
+    width:33%;
+    display: inline-block;
+}

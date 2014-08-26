@@ -48,19 +48,6 @@ class TopicModel extends Model {
         
         $this->getDb()->query($query);
         
-        if ($this->getDb()->affectedRows() <= 0) {
-            return false;
-        }
-        
-        return ['id' => $this->getDb()->lastId()];
-    }
-    
-    public function addTag($topic_id, $tag) {
-        $topic_id = intval($topic_id);
-        $tag = $this->getDb()->escape($tag);
-        
-        $this->getDb()->query("INSERT INTO topic_tags (topic_id, tag) VALUES ($topic_id, '$tag');");
-        
         return $this->getDb()->affectedRows() > 0;
     }
     
