@@ -69,6 +69,8 @@
     registerButton.click(function () {
 
         loginRegisterField.html('<h2>Register</h2>' +
+            '<label for="email">Email</label>' +
+            '<input type="text" id="email"/>' +
             '<label for="userRegister">Username</label>' +
             '<input type="text" id="userRegister"/>' +
             '<label for="passRegister">Password</label>' +
