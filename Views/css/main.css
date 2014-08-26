@@ -20,7 +20,7 @@ a {
     color: #000;
 }
 
-select,th,td {
+select,th,td,textarea {
     font-family: 'xolonium';
     font-size: 20px;
 }
@@ -86,7 +86,6 @@ textarea {
     display: block;
     color: #000;
     background-color: #fff;
-
 }
 
 #wrapper header ul li button:hover {
@@ -196,7 +195,7 @@ textarea {
 }
 #addTopic textarea {
     width: 80%;
-    height: 250px;
+    height: 150px;
     margin: 0 auto;
     display: block;
     margin-top: 15px;
@@ -207,7 +206,6 @@ textarea {
     font-size: 25px;
     margin: 0 auto;
     display:block;
-    width: 50%;
     margin-top: 15px;
 }
 
@@ -271,8 +269,14 @@ footer h4 {
 }
 
 /*Topics styling*/
-section h2 {
+.topics h2 {
+    font-size: 1.4rem;
     text-align: center;
+    padding: 5px;
+    background: rgba(255, 255, 255, .7);
+    text-shadow: 1px 1px #fff;
+    width: 50%;
+    margin: 0 auto;
     color: red;
 }
 

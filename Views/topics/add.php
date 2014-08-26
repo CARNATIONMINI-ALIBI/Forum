@@ -1,11 +1,8 @@
     <div id="addTopic">
-        <h1>New Topic</h1>
-        <label for="summaty">Summary</label>
-        <input type="text" name="summary" id="summary"/>
-        <label for="body">Description</label>
-        <textarea name="body" id="body"/></textarea>
-        <label for="tags">Tags</label>
-        <input type="text" id="tags"/>
+        <div id="response"><h2>New Topic</h2></div>
+        <input type="text" name="summary" id="summary" placeholder="Summary"/>
+        <textarea name="body" id="body" placeholder="Description"></textarea>
+        <input type="text" id="tags" placeholder="tags"/>
         <button onclick="addTopic()">Add topic</button>
     </div>
     <script>
@@ -17,11 +14,10 @@
             }).done(function (response) {
                 var json = $.parseJSON(response);
                 if (json.success == 1) {
-                    $("#response").html("<h1>Topic has been added successfully</h1>");
+                    $("#response").html("<h2>Topic has been added successfully</h2>");
                 }
             });
         }
     </script>
-    <div id="response"></div>
 
 

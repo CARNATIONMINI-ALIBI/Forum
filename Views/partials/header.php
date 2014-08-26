@@ -31,14 +31,14 @@
             });
         }
 
-        $(document).ready(function() {
-           $("#logoutButton").click(function () {
-            $.post("<?=$this->url('users', 'logout');?>", {
-                
-            }).done(function () {
-                window.location = "<?=$this->url('welcome', 'index');?>";
-            });
-           }) 
+        $(document).ready(function () {
+            $("#logoutButton").click(function () {
+                $.post("<?=$this->url('users', 'logout');?>", {
+
+                }).done(function () {
+                    window.location = "<?=$this->url('welcome', 'index');?>";
+                });
+            })
         });
     </script>
 </head>
@@ -50,27 +50,33 @@
         <h1>Space Odyssey Forum</h1>
 
         <h2>Space Adventure</h2>
+
         <?php if (!$this->getFrontController()->getController()->getApp()->UserModel->isLogged()): ?>
-        <ul>
-            <li>
-                <button id="loginButton">Login</button>
-            </li>
-            <li>
-                <button id="registerButton">Register</button>
-            </li>
-        </ul>
+            <ul>
+                <li>
+                    <button id="loginButton">Login</button>
+                </li>
+                <li>
+                    <button id="registerButton">Register</button>
+                </li>
+            </ul>
+            <div id="search">
+                <input type="text" id="searchbox" placeholder="search..."/>
+                <button onclick="searchTopics()">find</button>
+            </div>
         <?php else: ?>
-        <ul>
-            <li>
-                <button id="logoutButton">Logout</button>
-            </li>
-        </ul>
-        <div id="search">
-            <input type="text" id="searchbox" placeholder="search..."/>
-            <button onclick="searchTopics()">find</button>
-        </div>
-        <h2 class="welcomeUser">Welcome <?=$_SESSION['username'];?></h2>
-        <div id="topics"></div>
+            <ul>
+                <li>
+                    <button id="logoutButton">Logout</button>
+                </li>
+            </ul>
+            <div id="search">
+                <input type="text" id="searchbox" placeholder="search..."/>
+                <button onclick="searchTopics()">find</button>
+            </div>
+
+            <h2 class="welcomeUser">Welcome <?= $_SESSION['username']; ?></h2>
         <?php endif; ?>
+        <div id="topics"></div>
     </header>
     <main>
