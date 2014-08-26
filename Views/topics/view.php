@@ -33,13 +33,27 @@
     var answerField = $('#answerField');
     var buttonClose = $('#closeAnswerField');
     buttonAnswer.click(function () {
-        answerField.html(
-            '<label for="outername">Your Name</label>' +
-            '<input type="text" id="outername" /><br />' +
-            '<label for="answer">Answer</label>' +
+        var answerHtml = '';
+        <?php if (!$this->getFrontController()->getController()->getApp()->UserModel->isLogged()): ?>
+        answerHtml += '<label for="author">Your Name</label>' +
+            '<input type="text" id="author" /><br />';
+        <?php endif; ?>
+        answerHtml += '<label for="answer">Answer</label>' +
             '<textarea id="answer""></textarea><br />' +
-            '<a href="#" id="submitAnswer">Submit</a>');
+            '<a href="#" id="submitAnswer">Submit</a>'
+        answerField.html(answerHtml);
         answerField.css("padding", "20px");
     });
 
+    function addReply() {
+        $.post("<?= $this->url('answers', 'add', 'topicid', $this->topic['id']); ?>", {
+            username: $('#author').val(),
+            body: $('#answer').val()
+        }).done(function (response) {
+            var json = $.parseJSON(response);
+            if (json.success == 1) {
+                window.location = "<?= $this->url('topics', 'view', 'id', $this->topic['id']); ?>";
+            }
+        });
+    }
 </script>
