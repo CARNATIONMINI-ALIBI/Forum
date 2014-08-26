@@ -35,16 +35,17 @@ class AnswerModel extends Model {
         return $this->getDb()->fetch($result);
     }
     
-    public function add($body, $forum_id, $user_id) {
+    public function add($body, $topic_id, $user_id = null, $username = null) {
         $body = $this->getDb()->escape($body);
-        $forum_id = intval($forum_id);
+        $topic_id = intval($topic_id);
         $user_id = intval($user_id);
+        $username = $this->getDb()->escape($username);
         $query = "
-            INSERT INTO answers (body, forum_id, created_on, user_id) VALUES (
-                '$body', $forum_id, NOW(), $user_id
+            INSERT INTO answers (body, topic_id, created_on, user_id, username) VALUES (
+                '$body', $topic_id, NOW(), $user_id, '$username'
             )
         ";
-        
+        //echo($query);
         $this->getDb()->query($query);
         
         return $this->getDb()->affectedRows() > 0;
