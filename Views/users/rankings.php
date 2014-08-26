@@ -15,5 +15,5 @@
         <td><?= $user['register_date']; ?></td>
         <td><?= $user['posts']; ?></td>
     </tr>
-    <?php endforeach; ?>
+    <?php $position++; endforeach; ?>
 </table>
