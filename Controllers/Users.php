@@ -30,6 +30,7 @@ class Users extends Controller {
             $email = $this->getRequest()->getPost()->getParam('email');
             
             if ($this->getApp()->UserModel->register($user, $pass, $email)) {
+                $this->getApp()->UserModel->login($user, $pass);
                 die(json_encode(array('success' => 1)));
             }
         }

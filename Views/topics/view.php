@@ -1,5 +1,5 @@
 <section class="viewTopic">
-    <h2>Title of the topic</h2>
+    <h2><?= $this->topic['summary']; ?></h2>
 
     <div class="topic">
         <p id="topicBody"><?= $this->topic['body']; ?></p>
