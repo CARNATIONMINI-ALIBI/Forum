@@ -40,7 +40,7 @@
         <?php endif; ?>
         answerHtml += '<label for="answer">Answer</label>' +
             '<textarea id="answer""></textarea><br />' +
-            '<a href="#" id="submitAnswer">Submit</a>'
+            '<a href="#" id="submitAnswer" onclick="addReply()">Submit</a>'
         answerField.html(answerHtml);
         answerField.css("padding", "20px");
     });
