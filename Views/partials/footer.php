@@ -9,7 +9,7 @@
             <p>The newest registered user is <a href="<?= $this->url('users', 'profile', 'id', $lastUserInfo['id']);?>"><?= $lastUserInfo['username']; ?></a>.</p>
         </div>
     </section>
-    <h4>Powered By ANSR Framework</h4>
+    <a href="https://github.com/CARNATIONMINI-ALIBI/Forum"><h4>Powered By ANSR Framework</h4></a>
 </footer>
 </div>
 </body>

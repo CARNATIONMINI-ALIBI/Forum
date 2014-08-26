@@ -264,12 +264,16 @@ footer .whoIsOnline {
     padding: 5px;
 }
 
-footer h4 {
+footer a h4  {
     text-align: center;
+    color: #fff;
 }
 
 /*Topics styling*/
-.topics h2 {
+
+
+
+.topics h2, .viewTopic h2 {
     font-size: 1.4rem;
     text-align: center;
     padding: 5px;
@@ -298,4 +302,28 @@ a.button {
 .selectForums {
     width:33%;
     display: inline-block;
+}
+
+.answer {
+    padding: 20px;
+}
+
+.answerBody {
+    background: #fff;
+    padding: 20px;
+}
+
+.topic {
+    padding: 20px;
+    background: #fff;
+    margin: 0 20px;
+}
+
+.viewTopicButtons {
+    padding: 0 20px;
+    margin: 20px 0 4px;
+}
+
+.answerButtons {
+    margin-bottom: 4px;
 }
