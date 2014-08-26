@@ -10,27 +10,27 @@ class TopicModel extends Model {
     
     public function getTopicsByForumId($forum_id) {
         $forum_id = intval($forum_id);
-        $result = $this->getDb()->query("SELECT id, summary, body, forum_id, created_on, user_id, views FROM topics WHERE forum_id = $forum_id");
+        $result = $this->getDb()->query("SELECT id, summary, body, forum_id, created_on, user_id, views, is_closed FROM topics WHERE forum_id = $forum_id");
         
         return $this->getDb()->fetch($result);
     }
     
     public function getTopicsByUserId($user_id) {
         $user_id = intval($user_id);
-        $result = $this->getDb()->query("SELECT id, summary, body, forum_id, created_on, user_id, views FROM topics WHERE user_id = $user_id");
+        $result = $this->getDb()->query("SELECT id, summary, body, forum_id, created_on, user_id, views, is_closed FROM topics WHERE user_id = $user_id");
         
         return $this->getDb()->fetch($result);
     }
     
     public function getTopicById($id) {
         $id = intval($id);
-        $result = $this->getDb()->query("SELECT id, summary, body, forum_id, created_on, user_id, views FROM topics WHERE id = $id");
+        $result = $this->getDb()->query("SELECT id, summary, body, forum_id, created_on, user_id, views, is_closed FROM topics WHERE id = $id");
         
         return $this->getDb()->row($result);
     }
     
     public function getTopics() {
-        $result = $this->getDb()->query("SELECT id, summary, body, forum_id, created_on, user_id, views FROM topics");
+        $result = $this->getDb()->query("SELECT id, summary, body, forum_id, created_on, user_id, views, is_closed FROM topics");
 
         return $this->getDb()->fetch($result);
     }
@@ -64,12 +64,26 @@ class TopicModel extends Model {
         return $this->getDb()->affectedRows() > 0;
     }
     
-    public function edit($id, $summary, $body) {
+    public function deleteTags($topic_id) {
+        $topic_id = intval($topic_id);
+        
+        $this->getDb()->query("DELETE FROM topic_tags WHERE topic_id = $topic_id");
+        
+        return $this->getDb()->affectedRows() > 0;
+    }
+    
+    public function edit($id, $summary, $body, $tags) {
         $id = intval($id);
         $summary = $this->getDb()->escape($summary);
         $body = $this->getDb()->escape($body);
         
         $this->getDb()->query("UPDATE topics SET summary = '$summary', body = '$body' WHERE id = $id");
+        
+        $this->deleteTags($id);
+        
+        foreach ($tags as $tag) {
+            $this->addTag($id, trim($tag));
+        }
         
         return $this->getDb()->affectedRows() > 0;
     }
@@ -123,5 +137,29 @@ class TopicModel extends Model {
         $row = $this->getDb()->row($result);
         
         return !empty($row) ? $row['cnt'] : 0;
+    }
+    
+    public function getTopicTags($topic_id) {
+        $topic_id = intval($topic_id);
+        
+        $result = $this->getDb()->query("SELECT tag FROM topic_tags WHERE topic_id = $topic_id");
+        
+        return $this->getDb()->fetch($result);
+    }
+    
+    public function close($topic_id) {
+        $topic_id = intval($topic_id);
+        
+        $this->getDb()->query("UPDATE topics SET is_closed = 1 WHERE id = $topic_id");
+        
+        return $this->getDb()->affectedRows() > 0;
+    }
+    
+    public function reopen($topic_id) {
+        $topic_id = intval($topic_id);
+        
+        $this->getDb()->query("UPDATE topics SET is_closed = 0 WHERE id = $topic_id");
+        
+        return $this->getDb()->affectedRows() > 0;
     }
 }

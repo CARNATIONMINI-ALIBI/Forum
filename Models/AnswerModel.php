@@ -10,7 +10,7 @@ class AnswerModel extends Model {
     
     public function getAnswersByTopicId($topic_id) {
         $topic_id = intval($topic_id);
-        $result = $this->getDb()->query("SELECT id, body, topic_id, created_on, user_id FROM answers WHERE topic_id = $topic_id");
+        $result = $this->getDb()->query("SELECT id, body, topic_id, created_on, user_id, username FROM answers WHERE topic_id = $topic_id");
         
         return $this->getDb()->fetch($result);
     }
@@ -24,13 +24,13 @@ class AnswerModel extends Model {
 
     public function getAnswerById($id) {
         $id = intval($id);
-        $result = $this->getDb()->query("SELECT id, body, topic_id, created_on, user_id FROM answers WHERE id = $id");
+        $result = $this->getDb()->query("SELECT id, body, topic_id, created_on, user_id, username FROM answers WHERE id = $id");
         
         return $this->getDb()->row($result);
     }
     
     public function getAnswers() {
-        $result = $this->getDb()->query("SELECT id, body, topic_id, created_on, user_id FROM answers");
+        $result = $this->getDb()->query("SELECT id, body, topic_id, created_on, user_id, username FROM answers");
         
         return $this->getDb()->fetch($result);
     }

@@ -2,28 +2,56 @@
     <h2>Title of the topic</h2>
 
     <div class="topic">
-        <p><?= $this->topic['body']; ?></p>
+        <p id="topicBody"><?= $this->topic['body']; ?></p>
+        <div id="topicEdit" style="display:none">
+             <div id="addTopic">
+                <div id="response"><h2>Edit Topic</h2></div>
+                <input type="text" name="summary" id="summary" placeholder="Summary" value="<?=$this->topic['summary'];?>"/>
+                <textarea name="body" id="body" placeholder="Description"><?=$this->topic['body'];?></textarea>
+                <input type="text" id="tags" placeholder="tags" value="<?= $this->tags; ?>" />
+                <button onclick="editTopic()">Edit topic</button>
+                <button onclick="cancelEdit()">Cancel</button>
+            </div>
+        </div>
     </div>
     <div class="viewTopicButtons">
-        <button id="answerButton">Answer</button>
-        <a class="button" href="<?= $this->url('topics', 'edit', 'id', $this->topic['id']); ?>">Edit</a>
-        <a class="button" href="<?= $this->url('topics', 'close', 'id', $this->topic['id']); ?>">Close</a>
-        <a class="button" href="<?= $this->url('topics', 'delete', 'id', $this->topic['id']); ?>">Delete</a>
+        <?php if($this->topic['is_closed'] == 0): ?>
+            <button id="answerButton">Answer</button>
+        <?php endif; ?>
+        <?php if ($this->isOwnTopic || $this->isAdmin): ?>
+            <a class="button" id="editTopic" href="#x">Edit</a>
+            <?php if($this->topic['is_closed'] == 0):?>
+                <a class="button" id="closeTopic" href="#">Close</a>
+            <?php elseif($this->topic['is_closed'] == 1 && $this->isAdmin): ?>
+                <a class="button" id="reopenTopic" href="#">Reopen</a>
+            <?php endif; ?>
+            <a class="button" id="deleteTopic" href="#">Delete</a>
+        <?php endif; ?>
     </div>
     <div id="answerField"></div>
 
     <?php foreach ($this->answers as $answer): ?>
-
+        <?php $isOwnAnswer = isset($_SESSION['user_id']) && ($_SESSION['user_id'] == $answer['user_id']); ?>
         <div class="answer">
             <div class="answerBody">
-                <p><?= $answer['body']; ?></p>
+                <p id="answerBody<?=$answer['id'];?>"><?= $answer['body']; ?></p>
+                <?php if($isOwnAnswer || $this->isAdmin): ?>
+                    <div id="answerEdit<?=$answer['id'];?>" style="display:none">
+                        <div id="addAnswer<?=$answer['id'];?>">
+                           <div id="response<?=$answer['id'];?>"><h2>Edit Answer</h2></div>
+                           <textarea name="body" id="body<?=$answer['id'];?>" placeholder="Description"><?=$answer['body'];?></textarea>
+                           <button onclick="editAnswer(<?=$answer['id'];?>)">Edit answer</button>
+                           <button onclick="cancelAnswerEdit(<?=$answer['id'];?>)">Cancel</button>
+                       </div>
+                    </div> 
+                <?php endif; ?>
             </div>
-            <div class="answerButtons">
-                <a class="button" href="<?= $this->url('answers', 'edit', 'id', $answer['id']); ?>">Edit</a>
-                <a class="button" href="<?= $this->url('answers', 'close', 'id', $answer['id']); ?>">Close</a>
-                <a class="button" href="<?= $this->url('answers', 'delete', 'id', $answer['id']); ?>">Delete</a>
-            </div>
-
+            <?php if($isOwnAnswer || $this->isAdmin): ?>
+                <div class="answerButtons">
+                    <a class="button" onclick="toggleEditAnswer(<?=$answer['id'];?>)" href="#">Edit</a>
+                    <a class="button" onclick="deleteAnswer(<?=$answer['id'];?>)" href="#">Delete</a>
+                </div>
+            <?php endif; ?>
 
         </div>
     <?php endforeach; ?>
@@ -44,6 +72,45 @@
         answerField.html(answerHtml);
         answerField.css("padding", "20px");
     });
+    
+    $("#editTopic").click(function() {
+        $("#topicBody").hide();
+        $("#topicEdit").show();
+    });
+    
+    $("#closeTopic").click(function() {
+        $.post("<?= $this->url('topics', 'close', 'id', $this->topic['id']);?>", {
+            
+        }).done(function (response){
+            var json = $.parseJSON(response);
+            if (json.success == 1) {
+                window.location = "<?= $this->url('topics', 'view', 'id', $this->topic['id']); ?>";
+            }
+        });
+    });
+    
+    $("#reopenTopic").click(function() {
+        $.post("<?= $this->url('topics', 'reopen', 'id', $this->topic['id']);?>", {
+            
+        }).done(function (response){
+            var json = $.parseJSON(response);
+            if (json.success == 1) {
+                window.location = "<?= $this->url('topics', 'view', 'id', $this->topic['id']); ?>";
+            }
+        });
+    });
+    
+    $("#deleteTopic").click(function() {
+        $.post("<?= $this->url('topics', 'delete', 'id', $this->topic['id']);?>", {
+            
+        }).done(function (response){
+            var json = $.parseJSON(response);
+            if (json.success == 1) {
+                window.location = "<?= $this->url('forums', 'view', 'id', $this->topic['forum_id']); ?>";
+            }
+        });
+    })
+    
 
     function addReply() {
         $.post("<?= $this->url('answers', 'add', 'topicid', $this->topic['id']); ?>", {
@@ -56,4 +123,55 @@
             }
         });
     }
+    
+    function editTopic() {
+        $.post("<?= $this->url('topics', 'edit', 'id', $this->topic['id']); ?>", {
+            summary: $('#summary').val(),
+            body: $('#body').val(),
+            tags: $('#tags').val()
+        }).done(function (response) {
+            var json = $.parseJSON(response);
+            if (json.success == 1) {
+                window.location = "<?= $this->url('topics', 'view', 'id', $this->topic['id']); ?>";
+            }
+        });
+    }
+    
+    function cancelEdit() {
+        $("#topicBody").show();
+        $("#topicEdit").hide();
+    }
+    
+    function toggleEditAnswer(answer_id) {
+        $("#answerBody" + answer_id).hide();
+        $("#answerEdit" + answer_id).show();
+    }
+    
+    function cancelAnswerEdit(answer_id) {
+        $("#answerBody" + answer_id).show();
+        $("#answerEdit" + answer_id).hide();
+    }
+    
+    function editAnswer(answer_id) {
+        $.post("<?= $this->url('answers', 'edit', 'id'); ?>" + answer_id , {
+            body: $('#body' + answer_id).val()
+        }).done(function (response) {
+            var json = $.parseJSON(response);
+            if (json.success == 1) {
+                window.location = "<?= $this->url('topics', 'view', 'id', $this->topic['id']); ?>";
+            }
+        });
+    }
+    
+    function deleteAnswer(answer_id) {
+        $.post("<?= $this->url('answers', 'delete', 'id');?>" + answer_id , {
+            
+        }).done(function (response){
+            var json = $.parseJSON(response);
+            if (json.success == 1) {
+                window.location = "<?= $this->url('topics', 'view', 'id', $this->topic['id']); ?>";
+            }
+        });
+    }
+    
 </script>

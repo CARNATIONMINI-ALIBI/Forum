@@ -11,6 +11,8 @@ abstract class Controller {
     private $_view;
     private $_request;
     
+    protected $isAdmin = false;
+    
     public function __construct(\ANSR\App $app, \ANSR\View $view, \ANSR\Library\Request\Request $request) {
         $this->_app = $app;
         $this->_view = $view;
@@ -32,6 +34,7 @@ abstract class Controller {
     protected function init() {
         if ($this->getApp()->UserModel->isLogged()) {
             $this->getApp()->UserModel->updateLastClick($_SESSION['user_id'], $this->getView()->getFrontController()->getRouter()->getController() . '/' .  $this->getView()->getFrontController()->getRouter()->getAction());
+            $this->isAdmin = $this->getApp()->UserModel->isAdmin(isset($_SESSION['user_id']) ? $_SESSION['user_id'] : 0);
         }
     }
 
