@@ -56,7 +56,7 @@
                 <td><?= $topic['views']; ?></td>
                 <td>
                     by <a
-                        href="<?= $this->url('users', 'profiles', 'id', $this->getFrontController()->getController()->getApp()->UserModel->getIdByUsername($userInfo['username'])); ?>"><?= $userInfo['username']; ?></a><br/>
+                        href="<?= $this->url('users', 'profile', 'id', $this->getFrontController()->getController()->getApp()->UserModel->getIdByUsername($userInfo['username'])); ?>"><?= $userInfo['username']; ?></a><br/>
                     <span><?= $userInfo['created_on']; ?></span>
                 </td>
             </tr>

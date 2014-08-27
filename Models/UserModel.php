@@ -95,6 +95,21 @@ class UserModel extends Model {
         
         return isset($row['username']) ? $row['username'] : '';
     }
+    
+    public function getUserById($id) {
+        $id = intval($id);
+        
+        $result = $this->getDb()->query("
+            SELECT u.id, u.username, u.email, u.avatar, u.role_id, u.register_date, u.votes, COUNT(t.id) + COUNT(a.id) AS posts 
+            FROM users u
+            LEFT JOIN topics t ON t.user_id = u.id
+            LEFT JOIN answers a ON a.user_id = u.id
+            WHERE u.id = $id");
+        
+        $row = $this->getDb()->row($result);
+        
+        return !empty($row) ? $row : '';
+    }
 
     public function getRole($user_id) {
         $user_id = intval($user_id);
@@ -198,7 +213,7 @@ class UserModel extends Model {
         return $this->getDb()->fetch($result);
     }
     
-    public function hasVoted($voter_id, $voted_id, $topic_id = null, $answer_id = null) {
+    public function hasVoted($voter_id, $voted_id, $vote, $topic_id = null, $answer_id = null) {
         $voter_id = intval($voter_id);
         $voted_id = intval($voted_id);
         
@@ -209,7 +224,8 @@ class UserModel extends Model {
                 user_votes 
             WHERE 
                 voter_id = $voter_id AND 
-                voted_in = $voted_id ";
+                voted_id = $voted_id AND
+                vote = $vote ";
         
         if ($topic_id) {
             if (!$this->getApp()->TopicModel->isAuthor($voted_id, $topic_id)) {
@@ -234,7 +250,7 @@ class UserModel extends Model {
         if (empty($row)) {
             return false;
         }
-        
+
         return $row['cnt'] > 0;
     }
     
@@ -248,7 +264,6 @@ class UserModel extends Model {
         
         if ($topic_id) {
             $topic_id = intval($topic_id);
-            
         } else if ($answer_id) {
             $answer_id = intval($answer_id);
         } else {
@@ -259,18 +274,18 @@ class UserModel extends Model {
             return false;
         }
         
-        if ($this->hasVoted($voter_id, $voted_id, $topic_id, $answer_id)) {
+        if ($this->hasVoted($voter_id, $voted_id, $vote, $topic_id, $answer_id)) {
             return false;
         }
-        
+               
         $query = "
             INSERT INTO
                 user_votes
-                (voter_id, voted_id, topic_id, answer_id)
+                (voter_id, voted_id, topic_id, answer_id, vote)
             VALUES
-                ($voter_id, $voted_id, $topic_id, $answer_id)
+                ($voter_id, $voted_id, '$topic_id', '$answer_id', $vote)
         ";
-        
+
         $this->getDb()->query($query);
         
         if ($this->getDb()->affectedRows() > 0) {

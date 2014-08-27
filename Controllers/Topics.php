@@ -31,6 +31,7 @@ class Topics extends Controller {
             $this->getView()->topic = $topic;
             $this->getView()->answers = $answers;
             $this->getView()->tags = implode(', ', $tags);
+            $this->getView()->isLogged = $this->getApp()->UserModel->isLogged();
         }
     }
 

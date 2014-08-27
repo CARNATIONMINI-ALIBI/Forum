@@ -52,6 +52,31 @@ class Users extends Controller {
         
         $this->getView()->users = $this->getApp()->UserModel->getUsers($type);
     }
+    
+    public function profile() {
+        if ($this->getRequest()->getParam('id')) {
+            $id = $this->getRequest()->getParam('id');
+            $user = $this->getApp()->UserModel->getUserById($id);
+            
+            switch ($user['role_id']):
+                case \ANSR\Models\UserModel::ROLE_USER:
+                    $user['role'] = 'User';
+                    break;
+                case \ANSR\Models\UserModel::ROLE_MODERATOR:
+                    $user['role'] = 'Moderator';
+                    break;
+                case \ANSR\Models\UserModel::ROLE_ADMINISTRATOR:
+                    $user['role'] = 'Administrator';
+                    break;
+                default:
+                    $user['role'] = 'Guest';
+                    break;
+            endswitch;
+            
+            $this->getView()->user = $user;
+            $this->getView()->isOwnProfile = (isset($_SESSION['user_id']) && ($_SESSION['user_id'] == $user['id']));
+        }
+    }
 
     public function isAdmin() {
         return $this->getApp()->UserModel->getRole($_SESSION['user_id']) == \ANSR\Models\UserModel::ROLE_ADMINISTRATOR;

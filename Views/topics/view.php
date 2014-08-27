@@ -1,8 +1,10 @@
+<?php /* @var $this \ANSR\View */ ?>
+<?php $author = $this->getFrontController()->getController()->getApp()->UserModel->getUserById($this->topic['user_id']); ?>
 <section class="viewTopic">
     <h2><?= $this->topic['summary']; ?></h2>
 
     <div class="topic">
-        <p><span class="topicName">RoYaLL</span></p>
+        <p><span class="topicName"><?= $author['username']; ?></span></p>
         <p id="topicBody"><?= $this->topic['body']; ?></p>
         <div id="topicEdit" style="display:none">
              <div id="addTopic">
@@ -14,10 +16,12 @@
                 <button onclick="cancelEdit()">Cancel</button>
             </div>
         </div>
-        <p class="dateTime">03:45 pm 25 Aug 2014</p>
-        <p class="votesNumber">Votes: 256</p>
-        <a href="#" class="vote">+</a>
-        <a href="#" class="vote">-</a>
+        <p class="dateTime"><?= $this->topic['created_on']; ?></p>
+        <p class="votesNumber">Votes: <?= $author['votes']; ?></p>
+        <?php if (!$this->isOwnTopic && $this->isLogged): ?>
+            <a href="#" onclick="upvoteTopic(<?=$this->topic['user_id'];?>, <?=$this->topic['id']?>) "class="vote">+</a>
+            <a href="#" onclick="downvoteTopic(<?=$this->topic['user_id'];?>, <?=$this->topic['id']?>)" class="vote">-</a>
+        <?php endif; ?>
     </div>
     <div class="viewTopicButtons">
         <?php if($this->topic['is_closed'] == 0): ?>
@@ -37,9 +41,10 @@
 
     <?php foreach ($this->answers as $answer): ?>
         <?php $isOwnAnswer = isset($_SESSION['user_id']) && ($_SESSION['user_id'] == $answer['user_id']); ?>
+        <?php $answerer = $this->getFrontController()->getController()->getApp()->UserModel->getUserById($answer['user_id']); ?>
         <div class="answer">
             <div class="answerBody">
-                <p><span class="answerName">RoYaLL</span></p>
+                <p><span class="answerName"><?= isset($answerer['username']) ? $answerer['username'] : $answer['username']; ?></span></p>
                 <p class="answerBody" id="answerBody<?=$answer['id'];?>"><?= $answer['body']; ?></p>
                 <?php if($isOwnAnswer || $this->isAdmin): ?>
                     <div id="answerEdit<?=$answer['id'];?>" style="display:none">
@@ -51,10 +56,12 @@
                        </div>
                     </div> 
                 <?php endif; ?>
-                <p class="dateTime">03:45 pm 25 Aug 2014</p>
-                <p class="votesNumber">Votes: 256</p>
-                <a href="#" class="vote">+</a>
-                <a href="#" class="vote">-</a>
+                <p class="dateTime"><?= $answer['created_on']; ?></p>
+                <p class="votesNumber">Votes: <?= isset($answerer['votes']) ? $answerer['votes'] : '0 (Guest)';?></p>
+                <?php if(isset($answerer['votes']) && !$isOwnAnswer && $this->isLogged): ?>
+                    <a href="#" onclick="upvoteAnswer(<?=$answer['user_id'];?>, <?=$answer['id'];?>)" class="vote">+</a>
+                    <a href="#" onclick="downvoteAnswer(<?=$answer['user_id'];?>, <?=$answer['id'];?>)" class="vote">-</a>
+                <?php endif; ?>
             </div>
             <?php if($isOwnAnswer || $this->isAdmin): ?>
                 <div class="answerButtons">
@@ -184,4 +191,51 @@
         });
     }
     
+    function upvoteTopic(voted_id, topic_id) {
+        $.post("<?= $this->url('users', 'vote', 'id'); ?>" + voted_id , {
+            topicid: topic_id,
+            action: 1
+        }).done(function (response) {
+            var json = $.parseJSON(response);
+            if (json.success == 1) {
+                window.location = "<?= $this->url('topics', 'view', 'id', $this->topic['id']); ?>";
+            }
+        });
+    }
+    
+    function downvoteTopic(voted_id, topic_id) {
+        $.post("<?= $this->url('users', 'vote', 'id'); ?>" + voted_id , {
+            topicid: topic_id,
+            action: -1
+        }).done(function (response) {
+            var json = $.parseJSON(response);
+            if (json.success == 1) {
+                window.location = "<?= $this->url('topics', 'view', 'id', $this->topic['id']); ?>";
+            }
+        });
+    }
+    
+    function upvoteAnswer(voted_id, answer_id) {
+        $.post("<?= $this->url('users', 'vote', 'id'); ?>" + voted_id , {
+            answerid: answer_id,
+            action: 1
+        }).done(function (response) {
+            var json = $.parseJSON(response);
+            if (json.success == 1) {
+                window.location = "<?= $this->url('topics', 'view', 'id', $this->topic['id']); ?>";
+            }
+        });
+    }
+
+    function downvoteAnswer(voted_id, answer_id) {
+        $.post("<?= $this->url('users', 'vote', 'id'); ?>" + voted_id , {
+            answerid: answer_id,
+            action: -1
+        }).done(function (response) {
+            var json = $.parseJSON(response);
+            if (json.success == 1) {
+                window.location = "<?= $this->url('topics', 'view', 'id', $this->topic['id']); ?>";
+            }
+        });
+    }
 </script>
