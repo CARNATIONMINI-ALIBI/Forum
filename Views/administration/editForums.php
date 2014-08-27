@@ -1,3 +1,4 @@
+<h1 class="adminForumHeading">Forum Administration</h1>
 <?php if (isset($this->error)): ?>
     <h2> <?= $this->error; ?> </h2>
 <?php else: ?>
