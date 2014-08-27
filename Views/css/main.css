@@ -357,9 +357,15 @@ a.button {
     display: block;
 }
 
-#answerField a {
+#answerField a,  {
     background-color: #fff;
     text-decoration: none;
     padding: 3px;
     float: right
+}
+
+.vote {
+    background-color: #ccc;
+    text-decoration: none;
+    padding: 3px;
 }

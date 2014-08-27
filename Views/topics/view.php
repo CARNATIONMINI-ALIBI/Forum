@@ -2,6 +2,7 @@
     <h2><?= $this->topic['summary']; ?></h2>
 
     <div class="topic">
+        <p class="answerName">RoYaLL</p>
         <p id="topicBody"><?= $this->topic['body']; ?></p>
         <div id="topicEdit" style="display:none">
              <div id="addTopic">
@@ -13,6 +14,10 @@
                 <button onclick="cancelEdit()">Cancel</button>
             </div>
         </div>
+        <p class="dateTime">03:45 pm 25 Aug 2014</p>
+        <p class="votesNumber">Votes: 256</p>
+        <a href="#" class="vote">+</a>
+        <a href="#" class="vote">-</a>
     </div>
     <div class="viewTopicButtons">
         <?php if($this->topic['is_closed'] == 0): ?>
@@ -34,6 +39,7 @@
         <?php $isOwnAnswer = isset($_SESSION['user_id']) && ($_SESSION['user_id'] == $answer['user_id']); ?>
         <div class="answer">
             <div class="answerBody">
+                <p class="answerName">RoYaLL</p>
                 <p id="answerBody<?=$answer['id'];?>"><?= $answer['body']; ?></p>
                 <?php if($isOwnAnswer || $this->isAdmin): ?>
                     <div id="answerEdit<?=$answer['id'];?>" style="display:none">
@@ -45,6 +51,10 @@
                        </div>
                     </div> 
                 <?php endif; ?>
+                <p class="dateTime">03:45 pm 25 Aug 2014</p>
+                <p class="votesNumber">Votes: 256</p>
+                <a href="#" class="vote">+</a>
+                <a href="#" class="vote">-</a>
             </div>
             <?php if($isOwnAnswer || $this->isAdmin): ?>
                 <div class="answerButtons">
