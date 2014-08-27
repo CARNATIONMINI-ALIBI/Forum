@@ -312,6 +312,7 @@ a.button {
 .answerBody {
     background:rgba(255,255,255, .7);
     padding: 20px;
+    margin-top: 20px;
 }
 
 .topic {
@@ -369,10 +370,13 @@ a.button {
     background-color: #ccc;
     text-decoration: none;
     padding: 3px;
+}
 
 #topicBody {
     padding: 20px;
     background-color: #fff;
+    margin-top: 20px;
+    font-size: 21px;
 }
 
 .vote {
