@@ -5,8 +5,8 @@
         <th>Username</th>
         <th>Email</th>
         <th>Joined</th>
-        <th>Posts</th>
-        <th>Votes</th>
+        <th><a href="<?= $this->url('users', 'rankings', 'type', 'posts') ?>">Posts</a></th>
+        <th><a href="<?= $this->url('users', 'rankings', 'type', 'votes') ?>#">Votes</a></th>
     </tr>
     <?php foreach ($this->users as $user): ?>
     <tr>
