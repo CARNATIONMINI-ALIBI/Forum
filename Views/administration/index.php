@@ -1,6 +1,6 @@
 <?php $this->partial('adminheader.php'); ?>
     <div class="category">
-        <a href="#" id="toggledCategoryAdd">Add category</a>
+        <a href="#" id="toggledCategoryAdd">Add category</a> | <a href="<?= $this->url('administration', 'addforum');?>">Add forum</a>
         <div id="categoryAddMenu" style="display:none">
             <input type="text" id="categoryName" placeholder="Category name [Press enter to submit]" />
         </div>
