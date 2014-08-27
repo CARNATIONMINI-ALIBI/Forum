@@ -118,7 +118,7 @@ class UserModel extends Model {
 
         $row = $this->getDb()->row($result);
 
-        return $row['role_id'];
+        return !empty($row) ? $row['role_id'] : 'Guest';
     }
    
     public function isAdmin($user_id) {
