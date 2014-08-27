@@ -65,6 +65,51 @@ class Users extends Controller {
         session_destroy();
         exit;
     }
+    
+    /**
+     * GET: id
+     * POST: topicid || answerid
+     * POST: action
+     * 
+     * users/vote/id
+     */
+    public function vote() {
+        if (!$this->getApp()->UserModel->isLogged()) {
+            die(json_encode(['success' => 0]));
+        }
+        
+        if (false == ($voted_id = $this->getRequest()->getParam('id'))) {
+            die(json_encode(['success' => 0]));
+        }
+        
+        if ($this->getRequest()->getPost()->getParam('topicid')) {
+            $answer_id = null;
+            $topic_id = $this->getRequest()->getPost()->getParam('topicid');
+        } else if ($this->getRequest()->getPost()->getParam('answerid')) {
+            $topic_id = null;
+            $answer_id =  $this->getRequest()->getPost()->getParam('answerid');
+        } else {
+            die(json_encode(['success' => 0]));
+        }
+        
+        if (false == ($action = $this->getRequest()->getPost()->getParam('action'))) {
+            die(json_encode(['success' => 0]));
+        }
+        
+        $voter_id = $_SESSION['user_id'];
+        
+        if ($action == \ANSR\Models\UserModel::UPVOTE_COUNT) {
+            if($this->getApp()->UserModel->upvote($voter_id, $voted_id, $topic_id, $answer_id)) {
+                die(json_encode(['success' => 1]));
+            }
+        } elseif ($action == \ANSR\Models\UserModel::DOWNVOTE_COUNT) {
+            if($this->getApp()->UserModel->downvote($voter_id, $voted_id, $topic_id, $answer_id)) {
+                die(json_encode(['success' => 1]));
+            }
+        }
+        
+        die(json_encode(['success' => 0]));
+    }
 
 }
 

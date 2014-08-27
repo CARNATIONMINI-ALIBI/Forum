@@ -178,4 +178,19 @@ class TopicModel extends Model {
         
         return $this->getDb()->affectedRows() > 0;
     }
+    
+    public function isAuthor($user_id, $topic_id) {
+        $user_id = intval($user_id);
+        $topic_id = intval($topic_id);
+        
+        $result = $this->getDb()->query("SELECT COUNT(*) AS cnt FROM topics WHERE user_id = $user_id AND id = $topic_id");
+        
+        $row = $this->getDb()->row($result);
+        
+        if (empty($row)) {
+            return false;
+        }
+        
+        return $row['cnt'] > 0;
+    }
 }

@@ -16,6 +16,9 @@ class UserModel extends Model {
     
     const RANKING_TYPE_POSTS = 'posts';
     const RANKING_TYPE_UPVOTES = 'votes';
+    
+    const UPVOTE_COUNT = 1;
+    const DOWNVOTE_COUNT = -1;
 
     public function register($username, $password, $email, $avatar = null, $role_id = self::ROLE_USER) {
         $username = $this->getDb()->escape($username);
@@ -165,7 +168,7 @@ class UserModel extends Model {
     public function getUsers($ranking = null) {
         $query = "
             SELECT 
-                users.id, username, email, role_id, votes, (COUNT(answers.id) + COUNT(topics.id)) AS posts, register_date
+                users.id, users.username, email, role_id, votes, (COUNT(answers.id) + COUNT(topics.id)) AS posts, register_date
             FROM
                 users
             INNER JOIN
@@ -189,11 +192,100 @@ class UserModel extends Model {
             default:
                 break;
         endswitch;
-        
+
         $result = $this->getDb()->query($query);
         
         return $this->getDb()->fetch($result);
     }
     
+    public function hasVoted($voter_id, $voted_id, $topic_id = null, $answer_id = null) {
+        $voter_id = intval($voter_id);
+        $voted_id = intval($voted_id);
+        
+        $query = "
+            SELECT 
+                COUNT(*) AS cnt 
+            FROM 
+                user_votes 
+            WHERE 
+                voter_id = $voter_id AND 
+                voted_in = $voted_id ";
+        
+        if ($topic_id) {
+            if (!$this->getApp()->TopicModel->isAuthor($voted_id, $topic_id)) {
+                return true;
+            }
+            
+            $query .= " AND topic_id = " . intval($topic_id);
+        } else if ($answer_id) {
+            if (!$this->getApp()->AnswerModel->isAuthor($voted_id, $answer_id)) {
+                return true;
+            }
+            
+            $query .= " AND answer_id = " . intval($answer_id);
+        } else {
+            return true;
+        }
+        
+        $result = $this->getDb()->query($query);
+        
+        $row = $this->getDb()->row($result);
+        
+        if (empty($row)) {
+            return false;
+        }
+        
+        return $row['cnt'] > 0;
+    }
+    
+    private function vote($voter_id, $voted_id, $vote, $topic_id = null, $answer_id = null) {
+        $voter_id = intval($voter_id);
+        $voted_id = intval($voted_id);
+        
+        if ($voter_id == $voted_id) {
+            return false;
+        }
+        
+        if ($topic_id) {
+            $topic_id = intval($topic_id);
+            
+        } else if ($answer_id) {
+            $answer_id = intval($answer_id);
+        } else {
+            return false;
+        }
+        
+        if (!in_array($vote, array(-1, 1))) {
+            return false;
+        }
+        
+        if ($this->hasVoted($voter_id, $voted_id, $topic_id, $answer_id)) {
+            return false;
+        }
+        
+        $query = "
+            INSERT INTO
+                user_votes
+                (voter_id, voted_id, topic_id, answer_id)
+            VALUES
+                ($voter_id, $voted_id, $topic_id, $answer_id)
+        ";
+        
+        $this->getDb()->query($query);
+        
+        if ($this->getDb()->affectedRows() > 0) {
+            $this->getDb()->query("UPDATE users SET votes = votes + $vote WHERE id = $voted_id");
+        }
+        
+        return $this->getDb()->affectedRows() > 0;
+    }
+    
+    public function upvote($voter_id, $voted_id, $topic_id, $answer_id) {
+        return $this->vote($voter_id, $voted_id, self::UPVOTE_COUNT, $topic_id, $answer_id);
+    }
+    
+    public function downvote($voter_id, $voted_id, $topic_id, $answer_id) {
+        return $this->vote($voter_id, $voted_id, self::DOWNVOTE_COUNT, $topic_id, $answer_id);
+    }
 }
 

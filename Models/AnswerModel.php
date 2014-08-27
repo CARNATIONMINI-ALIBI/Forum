@@ -64,4 +64,19 @@ class AnswerModel extends Model {
         $this->getDb()->query("DELETE FROM answers WHERE id = " . intval($id));
         return $this->getDb()->affectedRows() > 0;
     }
+    
+    public function isAuthor($user_id, $answer_id) {
+        $user_id = intval($user_id);
+        $answer_id = intval($answer_id);
+        
+        $result = $this->getDb()->query("SELECT COUNT(*) AS cnt FROM answers WHERE user_id = $user_id AND id = $answer_id");
+        
+        $row = $this->getDb()->row($result);
+        
+        if (empty($row)) {
+            return false;
+        }
+        
+        return $row['cnt'] > 0;
+    }
 }
