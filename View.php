@@ -85,11 +85,14 @@ class View {
     }
 
     public function partial($name) {
-        include self::VIEW_FOLDER
+        $partial = self::VIEW_FOLDER
                 . DIRECTORY_SEPARATOR
                 . self::VIEW_PARTIALS
                 . DIRECTORY_SEPARATOR
                 . $name;
+        if (is_file($partial)) {
+            include $partial;
+        }
     }
     
     /**

@@ -150,9 +150,8 @@
         <h2>Space Adventure</h2>
         <div class="navigation">
             <ul>
-                <li><a href="#">Home</a><span> -></span></li>
-                <li><a href="#">Forums</a><span> -></span></li>
-                <li><a href="#">Topics</a><span> -></span></li>
+                <li><a href="<?= $this->url('welcome', 'index'); ?>">Home</a><span> -></span></li>
+                <?php $this->partial(strtolower($this->getFrontController()->getRouter()->getController().'Menu.php'));?>
             </ul>
         </div>
 
