@@ -148,6 +148,13 @@
         <h1>Space Odyssey Forum</h1>
 
         <h2>Space Adventure</h2>
+        <div class="navigation">
+            <ul>
+                <li><a href="#">Home</a><span> -></span></li>
+                <li><a href="#">Forums</a><span> -></span></li>
+                <li><a href="#">Topics</a><span> -></span></li>
+            </ul>
+        </div>
 
         <?php if (!$this->getFrontController()->getController()->getApp()->UserModel->isLogged()): ?>
             <ul>
