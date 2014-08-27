@@ -75,6 +75,7 @@ class Users extends Controller {
             
             $this->getView()->user = $user;
             $this->getView()->isOwnProfile = (isset($_SESSION['user_id']) && ($_SESSION['user_id'] == $user['id']));
+            $this->getView()->isAdmin = $this->isAdmin;
         }
     }
 
@@ -134,6 +135,32 @@ class Users extends Controller {
         }
         
         die(json_encode(['success' => 0]));
+    }
+    
+    public function edit() {
+        if (!$this->getApp()->UserModel->isLogged()) {
+            $this->redirect('welcome', 'index');
+        }
+        
+        if ($this->getRequest()->getParam('id')) {
+            $id = $this->getRequest()->getParam('id');
+            if ($id == $_SESSION['user_id'] || $this->isAdmin) {
+                $username = $this->getRequest()->getPost()->getParam('username');
+                $email = $this->getRequest()->getPost()->getParam('email');
+                $password = $this->getRequest()->getPost()->getParam('password');
+                $passwordRepeat = $this->getRequest()->getPost()->getParam('passwordRepeat');
+                
+                if ($password != $passwordRepeat) {
+                    $this->redirect('welcome', 'index');
+                }
+
+                if ($this->getApp()->UserModel->edit($id, $username, $email, $password)) {
+                    $this->redirect('users', 'profile', 'id', $id);
+                }
+            }
+        }
+        
+        $this->redirect('welcome', 'index');
     }
 
 }

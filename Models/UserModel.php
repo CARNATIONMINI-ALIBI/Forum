@@ -302,5 +302,25 @@ class UserModel extends Model {
     public function downvote($voter_id, $voted_id, $topic_id, $answer_id) {
         return $this->vote($voter_id, $voted_id, self::DOWNVOTE_COUNT, $topic_id, $answer_id);
     }
+    
+    public function edit($id, $username, $email, $password) {
+        $id = intval($id);
+        $username = $this->getDb()->escape($username);
+        $email = $this->getDb()->escape($email);
+        
+        $query = "UPDATE users SET email = '$email', username = '$username' ";
+        
+        if (!empty($password)){
+            $password = md5($password);
+            $query .= " , password = '$password' ";
+        }
+        
+        $query .= " WHERE id = $id";
+        
+        
+        $this->getDb()->query($query);
+        
+        return $this->getDb()->affectedRows() > 0;
+    } 
 }
 

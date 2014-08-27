@@ -1,3 +1,5 @@
+<?php if (!isset($this->topic)) die; ?>
+
 <?php $forum = $this->getFrontController()->getController()->getApp()->ForumModel->getForumById($this->topic['forum_id']); ?>
 <li>
     <li><a href="<?= $this->url('forums', 'view', 'id', $this->topic['forum_id']); ?>"><?= $forum['name']; ?></a><span> -></span></li>
