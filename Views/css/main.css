@@ -986,7 +986,7 @@ a.button {
     padding: 5px;
 }
 
-.adminButton {
+.adminButton h4{
     color: red;
     padding: 10px;
     font-size: 18px;
