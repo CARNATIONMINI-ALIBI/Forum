@@ -2,19 +2,7 @@
     <h2><?= $this->topic['summary']; ?></h2>
 
     <div class="topic">
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-        <p class="answerName">RoYaLL</p>
-=======
         <p><span class="topicName">RoYaLL</span></p>
->>>>>>> Stashed changes
-=======
-        <p><span class="topicName">RoYaLL</span></p>
->>>>>>> Stashed changes
-=======
-        <p><span class="topicName">RoYaLL</span></p>
->>>>>>> Stashed changes
         <p id="topicBody"><?= $this->topic['body']; ?></p>
         <div id="topicEdit" style="display:none">
              <div id="addTopic">
@@ -51,23 +39,8 @@
         <?php $isOwnAnswer = isset($_SESSION['user_id']) && ($_SESSION['user_id'] == $answer['user_id']); ?>
         <div class="answer">
             <div class="answerBody">
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-                <p class="answerName">RoYaLL</p>
-                <p id="answerBody<?=$answer['id'];?>"><?= $answer['body']; ?></p>
-=======
                 <p><span class="answerName">RoYaLL</span></p>
                 <p class="answerBody" id="answerBody<?=$answer['id'];?>"><?= $answer['body']; ?></p>
->>>>>>> Stashed changes
-=======
-                <p><span class="answerName">RoYaLL</span></p>
-                <p class="answerBody" id="answerBody<?=$answer['id'];?>"><?= $answer['body']; ?></p>
->>>>>>> Stashed changes
-=======
-                <p><span class="answerName">RoYaLL</span></p>
-                <p class="answerBody" id="answerBody<?=$answer['id'];?>"><?= $answer['body']; ?></p>
->>>>>>> Stashed changes
                 <?php if($isOwnAnswer || $this->isAdmin): ?>
                     <div id="answerEdit<?=$answer['id'];?>" style="display:none">
                         <div id="addAnswer<?=$answer['id'];?>">
