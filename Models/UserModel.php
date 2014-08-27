@@ -186,11 +186,11 @@ class UserModel extends Model {
                 users.id, users.username, email, role_id, votes, (COUNT(answers.id) + COUNT(topics.id)) AS posts, register_date
             FROM
                 users
-            INNER JOIN
+            LEFT JOIN
                 answers
             ON
                 users.id = answers.user_id
-            INNER JOIN
+            LEFT JOIN
                 topics
             ON
                 users.id = topics.user_id

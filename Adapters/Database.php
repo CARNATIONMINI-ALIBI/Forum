@@ -20,7 +20,7 @@ abstract class Database {
         $this->_db = $db;
 
         $this->connect();
-        $this->query("SET NAMES utf8");
+        $this->query("SET NAMES 'utf8'");
     }
 
     protected function connect() {
