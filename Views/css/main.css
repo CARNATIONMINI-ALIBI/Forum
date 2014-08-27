@@ -306,10 +306,11 @@ a.button {
 
 .answer {
     padding: 20px;
+
 }
 
 .answerBody {
-    background: #fff;
+    background:rgba(255,255,255, .7);
     padding: 20px;
 }
 
@@ -364,8 +365,53 @@ a.button {
     float: right
 }
 
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
 .vote {
     background-color: #ccc;
     text-decoration: none;
     padding: 3px;
+=======
+=======
+>>>>>>> Stashed changes
+=======
+>>>>>>> Stashed changes
+#topicBody {
+    padding: 20px;
+    background-color: #fff;
+}
+
+.vote {
+    background-color: #fff;
+    text-decoration: none;
+    padding: 3px;
+}
+
+.topicName {
+    font-size: 21px;
+    background-color: #fff;
+    padding: 3px;
+}
+
+.topic p, .answerBody p {
+    margin-bottom: 10px;
+}
+
+.answerName {
+    font-size: 21px;
+    padding: 3px;
+    background-color: #fff;
+}
+
+.dateTime {
+    text-align: center;
+    font-size: 15px;
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
+>>>>>>> Stashed changes
+=======
+>>>>>>> Stashed changes
 }
