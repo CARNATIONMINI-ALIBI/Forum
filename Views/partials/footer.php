@@ -11,7 +11,7 @@
         </div>
     </section>
     <?php if ($this->getFrontController()->getController()->getApp()->UserModel->isAdmin(isset($_SESSION['user_id']) ? $_SESSION['user_id'] : 0)): ?>
-        <a href="<?= $this->url('administration', 'index');?>"><h4>Go to Admin panel</h4></a>
+        <a class="adminButton" href="<?= $this->url('administration', 'index');?>"><h4>Go to Admin panel</h4></a>
     <?php endif; ?>
     <a href="https://github.com/CARNATIONMINI-ALIBI/Forum"><h4>Powered By ANSR Framework</h4></a>
 </footer>
