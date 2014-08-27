@@ -65,7 +65,6 @@ textarea {
     text-align: center;
     padding: 5px;
     background: rgba(255, 255, 255, .7);
-    margin-bottom: 15px;
     text-shadow: 1px 1px #fff;
 }
 
@@ -104,6 +103,21 @@ textarea {
     background-color: transparent;
     color:red;
     text-shadow: 1px 1px #000;
+}
+
+.navigation {
+    background-color: rgba(255,0,0, 0.6);
+    padding: 5px;
+    margin-bottom: 15px;
+}
+
+.navigation a {
+    text-decoration: none;
+    font-size: 15px;
+}
+
+.navigation a:hover {
+    color:#fff;
 }
 
 #search {
@@ -262,6 +276,12 @@ footer .whoIsOnline {
 .whoIsOnline h3 {
     color: red;
     padding: 5px;
+    width: 18%;
+    display:inline-block;
+}
+
+.whoIsOnline a:first-of-type h3 {
+    border-right: 2px solid red;
 }
 
 footer a h4  {

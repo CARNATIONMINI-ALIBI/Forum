@@ -4,6 +4,7 @@
 <footer>
     <section class="whoIsOnline">
         <a href="<?= $this->url('users', 'online'); ?>"><h3>Who is Online </h3></a>
+        <a href="<?= $this->url('users', 'rankings'); ?>""><h3>Rankings</h3></a>
         <div>
             <p>Our users have posted <span><?= $this->getFrontController()->getController()->getApp()->TopicModel->getTopicsCount();?></span> articles</p>
             <p>The newest registered user is <a href="<?= $this->url('users', 'profile', 'id', $lastUserInfo['id']);?>"><?= $lastUserInfo['username']; ?></a>.</p>
