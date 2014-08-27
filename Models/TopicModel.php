@@ -110,6 +110,14 @@ class TopicModel extends Model {
         return $this->getDb()->fetch($result);
     }
     
+    public function findTopicsByTag($tag) {
+        $tag = $this->getDb()->escape($tag);
+        
+        $result = $this->getDb()->query("SELECT t.id, t.summary, t.body, t.forum_id, t.created_on, t.user_id FROM topics t INNER JOIN topic_tags ON t.id = topic_tags.topic_id WHERE topic_tags.tag = '$tag'");
+        
+        return $this->getDb()->fetch($result);
+    }
+    
     public function getPostsCount($topic_id) {
         $topic_id = intval($topic_id);
 
@@ -123,7 +131,7 @@ class TopicModel extends Model {
     public function getLastAuthorInfo($topic_id) {
         $topic_id = intval($topic_id);
         $result = $this->getDb()->query("
-            SELECT u.username, a.created_on FROM topics t INNER JOIN answers a ON t.id = a.topic_id INNER JOIN users u ON u.id = a.user_id WHERE t.id = $topic_id ORDER BY created_on DESC LIMIT 1"
+            SELECT IF(u.username IS NULL, CONCAT(a.username, ' (Guest)'), u.username) AS username, a.created_on FROM topics t INNER JOIN answers a ON t.id = a.topic_id LEFT JOIN users u ON u.id = a.user_id WHERE t.id = $topic_id ORDER BY created_on DESC LIMIT 1"
         );
 
         $row = $this->getDb()->row($result);
@@ -159,6 +167,14 @@ class TopicModel extends Model {
         $topic_id = intval($topic_id);
         
         $this->getDb()->query("UPDATE topics SET is_closed = 0 WHERE id = $topic_id");
+        
+        return $this->getDb()->affectedRows() > 0;
+    }
+    
+    public function visit($topic_id) {
+        $topic_id = intval($topic_id);
+        
+        $this->getDb()->query("UPDATE topics SET views = views + 1 WHERE id = $topic_id");
         
         return $this->getDb()->affectedRows() > 0;
     }

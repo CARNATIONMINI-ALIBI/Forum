@@ -18,18 +18,18 @@ class Topics extends Controller {
         if ($this->getRequest()->getParam('id')) {
             $topic = $this->getApp()->TopicModel->getTopicById($this->getRequest()->getParam('id'));
             $answers = $this->getapp()->AnswerModel->getAnswersByTopicId($this->getRequest()->getParam('id'));
+            $this->getApp()->TopicModel->visit($topic['id']);
+            $tags = [];
+            $tagsResponse = $this->getApp()->TopicModel->getTopicTags($topic['id']);
+            
+            foreach ($tagsResponse as $tagResponse) {
+                $tags[] = $tagResponse['tag'];
+            }
             
             $this->getView()->isOwnTopic = (isset($_SESSION['user_id']) && $topic['user_id'] == $_SESSION['user_id']);
             $this->getView()->isAdmin = $this->isAdmin;
             $this->getView()->topic = $topic;
             $this->getView()->answers = $answers;
-            
-            $tags = [];
-            $tagsResponse = $this->getApp()->TopicModel->getTopicTags($topic['id']);
-            foreach ($tagsResponse as $tagResponse) {
-                $tags[] = $tagResponse['tag'];
-            }
-            
             $this->getView()->tags = implode(', ', $tags);
         }
     }
@@ -72,6 +72,10 @@ class Topics extends Controller {
 
         if ($this->getRequest()->getPost()->getParam('keyword')) {
             $result = $this->getApp()->TopicModel->find($this->getRequest()->getPost()->getParam('keyword'));
+        }
+        
+        if ($this->getRequest()->getPost()->getParam('tag')) {
+            $result = $this->getApp()->TopicModel->findTopicsByTag($this->getRequest()->getPost()->getParam('tag'));
         }
 
         die(json_encode($result));

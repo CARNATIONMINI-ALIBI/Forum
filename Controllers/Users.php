@@ -19,7 +19,7 @@ class Users extends Controller {
             }
         }
         
-         return die(json_encode(array('success' => 0, 'msg' => 'Wrong or missing credentials')));
+        die(json_encode(array('success' => 0, 'msg' => 'Wrong or missing credentials')));
     }
     
     public function register() {
@@ -35,7 +35,7 @@ class Users extends Controller {
             }
         }
         
-         return die(json_encode(array('success' => 0, 'msg' => 'User exists or missing credentials')));
+        die(json_encode(array('success' => 0, 'msg' => 'User exists or missing credentials')));
     }
     
     public function online() {

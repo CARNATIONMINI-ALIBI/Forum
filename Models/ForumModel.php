@@ -82,7 +82,7 @@ class ForumModel extends Model {
         $forum_id = intval($forum_id);
         $result = $this->getDb()->query("
             SELECT 
-                u.username, a.created_on 
+                IF(u.username IS NULL, CONCAT(a.username, ' (Guest)'), u.username) AS username, a.created_on 
             FROM 
                 forums f 
             INNER JOIN 
@@ -93,7 +93,7 @@ class ForumModel extends Model {
                 answers a
             ON 
                 a.topic_id = t.id
-            INNER JOIN
+            LEFT JOIN
                 users u
             ON 
                 a.user_id = u.id

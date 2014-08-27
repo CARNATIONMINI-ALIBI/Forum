@@ -78,65 +78,66 @@
 
             });
 
-            function searchTopics() {
-                $('#loginRegisterField').html('');
-                $('#topics').html('');
-                $('#response').html('');
-
-                $.post("<?= $this->url('topics', 'find'); ?>", {
-                    keyword: $('#searchbox').val()
-                }).done(function (response) {
-                    var json = $.parseJSON(response);
-                    if (json.success == 0) {
-                        $('#topics').html('<p class="noResults">No results found</p>')
-                    } else {
-                        $('#topics').html('<h2>Search results</h2>')
-                        $.each(json, function (i, item) {
-                            var href = "<a href='<?= HOST; ?>topics/view/id/" + item.id + "'>" + item.summary + "</a><br />";
-                            $('#topics').append(href);
-                        })
-                    }
-                });
-            }
-
         });
         
-             function login() {
-                $.post("<?= $this->url('users', 'login'); ?>", {
-                    username: $('#userLogin').val(),
-                    password: $('#passLogin').val()
-                }).done(function (response) {
-                    var json = $.parseJSON(response);
-                    if (json.success == 1) {
-                        $('#response').html('');
-                        window.location = "<?= $this->url('welcome', 'index'); ?>";
-                    } else {
-                        $('#response').html('<h2 class="incorrect">' + 'Incorrect username or password' + '</h2>');
-                    }
-                });
-            }
+        function searchTopics() {
+            $('#loginRegisterField').html('');
+            $('#topics').html('');
+            $('#response').html('');
 
-            function register() {
-                if ($("#passRegister").val() !== $("#passRepeat").val()) {
-                    $("#response").html('<h2 class="incorrect">' + 'Password missmatch' + '</h2>')
-                    return false;
+            $.post("<?= $this->url('topics', 'find'); ?>", {
+                keyword: $('#searchbox').val()
+            }).done(function (response) {
+                var json = $.parseJSON(response);
+                if (json.success == 0 || $.isEmptyObject(json)) {
+                    $('#topics').html('<p class="noResults">No results found</p>')
+                } else {
+                    $('#topics').html('<h2>Search results</h2>')
+                    $.each(json, function (i, item) {
+                        var href = "<a href='<?= HOST; ?>topics/view/id/" + item.id + "'>" + item.summary + "</a><br />";
+                        $('#topics').append(href);
+                    })
                 }
-                
-                $.post("<?= $this->url('users', 'register'); ?>", {
-                    username: $('#userRegister').val(),
-                    password: $('#passRegister').val(),
-                    email: $('#email').val()
-                }).done(function (response) {
-                    var json = $.parseJSON(response);
-                    if (json.success == 1) {
-                        $('#response').html('');
-                        window.location = "<?= $this->url('welcome', 'index'); ?>";
-                    } else {
-                        $('#response').html('<h2 class="incorrect">' + json.msg + '</h2>');
-                    }
-                });
-                
-            }
+            });
+        }
+
+        
+        function login() {
+           $.post("<?= $this->url('users', 'login'); ?>", {
+               username: $('#userLogin').val(),
+               password: $('#passLogin').val()
+           }).done(function (response) {
+               var json = $.parseJSON(response);
+               if (json.success == 1) {
+                   $('#response').html('');
+                   window.location = "<?= $this->url('welcome', 'index'); ?>";
+               } else {
+                   $('#response').html('<h2 class="incorrect">' + 'Incorrect username or password' + '</h2>');
+               }
+           });
+        }
+
+        function register() {
+           if ($("#passRegister").val() !== $("#passRepeat").val()) {
+               $("#response").html('<h2 class="incorrect">' + 'Password missmatch' + '</h2>')
+               return false;
+           }
+
+           $.post("<?= $this->url('users', 'register'); ?>", {
+               username: $('#userRegister').val(),
+               password: $('#passRegister').val(),
+               email: $('#email').val()
+           }).done(function (response) {
+               var json = $.parseJSON(response);
+               if (json.success == 1) {
+                   $('#response').html('');
+                   window.location = "<?= $this->url('welcome', 'index'); ?>";
+               } else {
+                   $('#response').html('<h2 class="incorrect">' + json.msg + '</h2>');
+               }
+           });
+
+        }
     </script>
 </head>
 

@@ -45,7 +45,7 @@ class AnswerModel extends Model {
                 '$body', $topic_id, NOW(), $user_id, '$username'
             )
         ";
-        //echo($query);
+
         $this->getDb()->query($query);
         
         return $this->getDb()->affectedRows() > 0;

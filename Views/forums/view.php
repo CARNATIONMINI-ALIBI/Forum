@@ -7,6 +7,23 @@
             window.location = "<?=$this->url('forums', 'view', 'id');?>" + option;
         });
     });
+    
+    function searchByTag(tag) {
+        $.post("<?= $this->url('topics', 'find'); ?>", {
+            tag: tag
+        }).done(function (response) {
+            var json = $.parseJSON(response);
+            if (json.success == 0) {
+                $('#topics').html('<p class="noResults">No results found</p>')
+            } else {
+                $('#topics').html('<h2>Search results</h2>')
+                $.each(json, function (i, item) {
+                var href = "<a href='<?= HOST; ?>topics/view/id/" + item.id + "'>" + item.summary + "</a><br />";
+                    $('#topics').append(href);
+                })
+            }
+        });
+    }
 </script>
 
 <section class="topics">
@@ -20,12 +37,20 @@
         </tr>
         <?php foreach ($this->topics as $topic): ?>
             <?php $userInfo = $this->getFrontController()->getController()->getApp()->TopicModel->getLastAuthorInfo($topic['id']); ?>
+            <?php $tags = $this->getFrontController()->getController()->getApp()->TopicModel->getTopicTags($topic['id']); ?>
             <tr>
                 <td>
                     <a href="<?= $this->url('topics', 'view', 'id', $topic['id']); ?>"><?= $topic['summary']; ?></a>
                     <br/>
                     <span>by <a
                             href="<?= $this->url('users', 'profile', 'id', $topic['user_id']); ?>"><?= $this->getFrontController()->getController()->getApp()->UserModel->getUsernameById($topic['user_id']); ?></a></span>
+                    <span>
+                        <br />
+                        Tags: 
+                        <?php foreach ($tags as $tag): ?>
+                            <a href="#" onclick="searchByTag('<?=$tag['tag'];?>')"><?=$tag['tag'];?></a> |
+                        <?php endforeach; ?>
+                    </span>
                 </td>
                 <td><?= $this->getFrontController()->getController()->getApp()->TopicModel->getPostsCount($topic['id']); ?></td>
                 <td><?= $topic['views']; ?></td>
