@@ -19,10 +19,25 @@ class Forums extends Controller {
     }
     
     public function topics() {
-         if ($this->getRequest()->getParam('id')) {
+        if ($this->getRequest()->getParam('id')) {
             $result = $this->getApp()->TopicModel->getTopicsByForumId($this->getRequest()->getParam('id'));
             
             $this->getView()->forum = $result;
         }
+    }
+    
+    public function delete() {
+        if (!$this->isAdmin) {
+            die(json_encode(['success' => 0]));
+        }
+        
+        if ($this->getRequest()->getParam('id')) {
+            $id = $this->getRequest()->getParam('id');
+            if ($this->getApp()->ForumModel->delete($id)) {
+                die(json_encode(['success' => 1]));
+            }
+        }
+        
+        die(json_encode(['success' => 0]));
     }
 }

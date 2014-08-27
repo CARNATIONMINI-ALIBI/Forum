@@ -60,7 +60,7 @@ abstract class Controller {
     }
 
     protected function redirect($controller, $action = null, $requestParam = null, $requestValue = null) {
-        $url = HOST . '/' . $controller;
+        $url = HOST . $controller;
         if ($action) {
             $url .= '/' . $action;
         }

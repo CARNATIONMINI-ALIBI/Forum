@@ -1,15 +1,16 @@
+<?php if (isset($this->error)): ?>
+    <h2> <?= $this->error; ?> </h2>
+<?php else: ?>
 <section class="administration">
     <h2>Edit Forums</h2>
-    <select class="category">
-        <option>Domashni</option>
-        <option>Teamwork</option>
-        <option>Zapoznanstva</option>
-    </select>
-    <select class="forum">
-        <option>Homework PHP - Functions && objects</option>
-        <option>Kak se pravi musaka</option>
-        <option>Kak se pravi vsichko</option>
-    </select>
-    <a href="#">Lock Forum</a>
-    <a href="#">Delete Forum</a>
+    <form action="" method="post">
+        <select name="category" class="category">
+            <?php foreach ($this->categories as $category): ?>
+            <option value="<?= $category['id']; ?>" <?= ($category['id'] == $this->forum['category_id']) ? 'selected' : '';?>><?= $category['name']; ?></option>
+            <?php endforeach; ?>
+        </select>
+        <input type="text" name="name" class="forum" value="<?= $this->forum['name']; ?>">
+        <input type="submit" name="submit" value="edit"/>
+    </form>
 </section>
+<?php endif; ?>
