@@ -14,22 +14,29 @@
             Last post
         </th>
     </tr>
-    <?php foreach ($this->forums as $forum): ?>
-    <?php $userInfo = $this->getFrontController()->getController()->getApp()->ForumModel->getLastAuthorInfo($forum['id']);?>
+    <?php foreach ($this->categories as $category): ?>
     <tr>
-        <td>
-            <a href="<?=$this->url('forums', 'view', 'id', $forum['id']);?>"> <?= $forum['name']; ?> </a>
-        </td>
-        <td>
-            <?= $this->getFrontController()->getController()->getApp()->ForumModel->getTopicsCount($forum['id']); ?>
-        </td>
-        <td>
-            <?= $this->getFrontController()->getController()->getApp()->ForumModel->getPostsCount($forum['id']); ?>
-        </td>
-        <td>
-            by <a href="<?= $this->url('users', 'profile', 'id', $this->getFrontController()->getController()->getApp()->UserModel->getIdByUsername($userInfo['username']));?>"><?= $userInfo['username']; ?></a><br/>
-            <span><?= $userInfo['created_on']; ?></span>
-        </td>
+        <th colspan="4">
+            <a href="#"><?=$category['name']; ?></a>
+        </th>
     </tr>
+        <?php foreach ($category['forums'] as $forum): ?>
+        <?php $userInfo = $this->getFrontController()->getController()->getApp()->ForumModel->getLastAuthorInfo($forum['id']);?>
+        <tr>
+            <td>
+                <a href="<?=$this->url('forums', 'view', 'id', $forum['id']);?>"> <?= $forum['name']; ?> </a>
+            </td>
+            <td>
+                <?= $this->getFrontController()->getController()->getApp()->ForumModel->getTopicsCount($forum['id']); ?>
+            </td>
+            <td>
+                <?= $this->getFrontController()->getController()->getApp()->ForumModel->getPostsCount($forum['id']); ?>
+            </td>
+            <td>
+                by <a href="<?= $this->url('users', 'profile', 'id', $this->getFrontController()->getController()->getApp()->UserModel->getIdByUsername($userInfo['username']));?>"><?= $userInfo['username']; ?></a><br/>
+                <span><?= $userInfo['created_on']; ?></span>
+            </td>
+        </tr>
+        <?php endforeach; ?>
     <?php endforeach; ?>
 </table>
