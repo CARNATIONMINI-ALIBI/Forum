@@ -64,7 +64,7 @@
     </table>
     <div class="topicOptions">
         <div class="topicButtons">
-            <a class="button" href="#">New Topic</a>
+            <a class="button" href="<?= $this->url('topics', 'add', 'forumid', $this->forum['id']) ?>">New Topic</a>
             <a class="button" href="<?= $this->url('welcome', 'index'); ?>">Return to Index</a>
         </div>
         <div class="selectForums">
