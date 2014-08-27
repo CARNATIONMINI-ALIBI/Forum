@@ -2,12 +2,13 @@
     <h2> No such user  </h2>
 <?php elseif ($this->isOwnProfile): ?>
     <section class="profile">
-        <h2><input type="text" name="username" value="<?= $this->user['username'];?>"></h2>
+        <h2><label style="font-size: 20px;">Name: <input type="text" name="username" value="<?= $this->user['username'];?>"></label></h2>
         <h3><?= $this->user['role'];?></h3>
         <p>Registered: <span><?= $this->user['register_date'];?></span></p>
-        <p>Email: <span><input type="text" name="email" value="<?= $this->user['email'];?>"</span></p>
+        <p><label>Email: <span><input type="text" name="email" value="<?= $this->user['email'];?>"</span></label></p>
         <p>Posts: <span><?= $this->user['posts']; ?></span></p>
         <p>Votes: <span><?= $this->user['votes']; ?></span></p>
+        <input type="submit" />
     </section>
 <?php else: ?>
 <section class="profile">
