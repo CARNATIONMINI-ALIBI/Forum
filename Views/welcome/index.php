@@ -1,4 +1,14 @@
 <?php /* @var $this \ANSR\View */ ?>
+<?php if ($this->loginRequired): ?>
+<script>
+    $(document).ready((function() {
+        (function() {
+            $("#loginButton").click(); 
+        }());
+    }))
+    
+</script>
+<?php endif; ?>
 <table class="mainTable">
     <tr>
         <th>
@@ -33,7 +43,7 @@
                 <?= $this->getFrontController()->getController()->getApp()->ForumModel->getPostsCount($forum['id']); ?>
             </td>
             <td>
-                by <a href="<?= $this->url('users', 'profile', 'id', $this->getFrontController()->getController()->getApp()->UserModel->getIdByUsername($userInfo['username']));?>"><?= $userInfo['username']; ?></a><br/>
+                by <a href="<?= $this->url('users', 'profile', 'id', $this->getFrontController()->getController()->getApp()->UserModel->getIdByUsername($userInfo['username']));?>"><?= htmlentities($userInfo['username']); ?></a><br/>
                 <span><?= $userInfo['created_on']; ?></span>
             </td>
         </tr>

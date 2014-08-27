@@ -78,6 +78,11 @@ class Topics extends Controller {
         if ($this->getRequest()->getPost()->getParam('tag')) {
             $result = $this->getApp()->TopicModel->findTopicsByTag($this->getRequest()->getPost()->getParam('tag'));
         }
+        
+        foreach ($result as &$row) {
+            $row['summary'] = htmlentities($row['summary']);
+            $row['summary'] = htmlentities($row['body']);
+        }
 
         die(json_encode($result));
     }

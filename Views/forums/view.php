@@ -40,7 +40,7 @@
             <?php $tags = $this->getFrontController()->getController()->getApp()->TopicModel->getTopicTags($topic['id']); ?>
             <tr>
                 <td>
-                    <a href="<?= $this->url('topics', 'view', 'id', $topic['id']); ?>"><?= $topic['summary']; ?></a>
+                    <a href="<?= $this->url('topics', 'view', 'id', $topic['id']); ?>"><?= htmlentities($topic['summary']); ?></a>
                     <br/>
                     <span>by <a
                             href="<?= $this->url('users', 'profile', 'id', $topic['user_id']); ?>"><?= $this->getFrontController()->getController()->getApp()->UserModel->getUsernameById($topic['user_id']); ?></a></span>
@@ -48,7 +48,7 @@
                         <br />
                         Tags: 
                         <?php foreach ($tags as $tag): ?>
-                            <a href="#" onclick="searchByTag('<?=$tag['tag'];?>')"><?=$tag['tag'];?></a> |
+                            <a href="#" onclick="searchByTag('<?=htmlentities($tag['tag']);?>')"><?=htmlentities($tag['tag']);?></a> |
                         <?php endforeach; ?>
                     </span>
                 </td>
@@ -56,7 +56,7 @@
                 <td><?= $topic['views']; ?></td>
                 <td>
                     by <a
-                        href="<?= $this->url('users', 'profile', 'id', $this->getFrontController()->getController()->getApp()->UserModel->getIdByUsername($userInfo['username'])); ?>"><?= $userInfo['username']; ?></a><br/>
+                        href="<?= $this->url('users', 'profile', 'id', $this->getFrontController()->getController()->getApp()->UserModel->getIdByUsername($userInfo['username'])); ?>"><?= htmlentities($userInfo['username']); ?></a><br/>
                     <span><?= $userInfo['created_on']; ?></span>
                 </td>
             </tr>

@@ -1,11 +1,11 @@
 <?php /* @var $this \ANSR\View */ ?>
 <?php $author = $this->getFrontController()->getController()->getApp()->UserModel->getUserById($this->topic['user_id']); ?>
 <section class="viewTopic">
-    <h2><?= $this->topic['summary']; ?></h2>
+    <h2><?= htmlentities($this->topic['summary']); ?></h2>
 
     <div class="topic">
-        <p><span class="topicName"><?= $author['username']; ?></span></p>
-        <p id="topicBody"><?= $this->topic['body']; ?></p>
+        <p><span class="topicName"><?= htmlentities($author['username']); ?></span></p>
+        <p id="topicBody"><?= htmlentities($this->topic['body']); ?></p>
         <div id="topicEdit" style="display:none">
              <div id="addTopic">
                 <div id="response"><h2>Edit Topic</h2></div>
@@ -44,8 +44,8 @@
         <?php $answerer = $this->getFrontController()->getController()->getApp()->UserModel->getUserById($answer['user_id']); ?>
         <div class="answer">
             <div class="answerBody">
-                <p><span class="answerName"><?= isset($answerer['username']) ? $answerer['username'] : $answer['username']; ?></span></p>
-                <p class="answerBody" id="answerBody<?=$answer['id'];?>"><?= $answer['body']; ?></p>
+                <p><span class="answerName"><?= isset($answerer['username']) ? htmlentities($answerer['username']) : htmlentities($answer['username']); ?></span></p>
+                <p class="answerBody" id="answerBody<?=$answer['id'];?>"><?= htmlentities($answer['body']); ?></p>
                 <?php if($isOwnAnswer || $this->isAdmin): ?>
                     <div id="answerEdit<?=$answer['id'];?>" style="display:none">
                         <div id="addAnswer<?=$answer['id'];?>">
