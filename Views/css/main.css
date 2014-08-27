@@ -237,6 +237,11 @@ th, td {
     text-align: center;
 }
 
+td span {
+    display: block;
+    margin-top: 15px;
+}
+
 table td a {
     color: red;
 }
